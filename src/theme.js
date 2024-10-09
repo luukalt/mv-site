@@ -4,14 +4,14 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2', // Customize primary color (default: blue)
+      main: '#fffdee', // Customize primary color (default: blue)
     },
     secondary: {
       main: '#ff5722', // Customize secondary color (default: orange)
     },
     background: {
-      default: '#f5f5f5', // Background color for the entire app
-      paper: '#ffffff', // Background for cards, app bar, etc.
+      default: '#fffdee', // Background color for the entire app
+      paper: '#fffdee', // Background for cards, app bar, etc.
     },
   },
   typography: {
@@ -35,7 +35,7 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#1976d2', // Customize AppBar background
+          backgroundColor: '#fffdee', // Customize AppBar background
         },
       },
     },

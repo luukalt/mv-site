@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 
 export default function Home() {
   return (
-    <Layout>
+    <>
       <Typography variant="h3" gutterBottom>
         Welcome to School Materials
       </Typography>
@@ -68,6 +68,6 @@ export default function Home() {
           </Link>
         </Grid>
       </Grid>
-    </Layout>
+    </>
   );
 }

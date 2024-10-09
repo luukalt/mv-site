@@ -1,12 +1,23 @@
 import Layout from '../components/Layout';
-import '../styles/globals.css';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from '../theme';
+import '../styles/globals.css'; // Import global styles
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <style jsx global>{`
+        body {
+          background-color: ${theme.palette.background.default};
+        }
+      `}</style>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   );
 }
 
-export default MyApp;
+export default App;

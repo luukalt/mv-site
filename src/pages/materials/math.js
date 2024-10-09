@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 
 export default function MathMaterials() {
   return (
-    <Layout>
+    <>
       <Container>
         <Typography variant="h4" gutterBottom>
           Math Materials
@@ -20,6 +20,6 @@ export default function MathMaterials() {
           </ListItem>
         </List>
       </Container>
-    </Layout>
+    </>
   );
 }
