@@ -1,7 +1,7 @@
 import Layout from '../components/Layout';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import theme from '../theme';
+import theme from '../styles/theme';
 import '../styles/globals.css'; // Import global styles
 
 function App({ Component, pageProps }) {
