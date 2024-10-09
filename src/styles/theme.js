@@ -1,20 +1,28 @@
-import { createTheme } from '@mui/material/styles';
-// import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-// import { Dancing_Script  } from 'next/font/google'
+// theme.js
 
-// const dancingScript = Dancing_Script({
-//   subsets: ['latin'], // Specify the subsets you want to use
-//   weight: ['400', '700'], // Specify the weights you want to use
-// });
+import { createTheme } from '@mui/material/styles';
+import { Dancing_Script, Indie_Flower } from 'next/font/google';
+
+// Load the Dancing Script font
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
+// Load the Indie Flower font
+const indieFlower = Indie_Flower({
+  subsets: ['latin'], 
+  weight: ['400'], 
+});
 
 // Create a custom theme using MUI's createTheme function
-let theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
-      main: '#fffdee', // Customize primary color (default: blue)
+      main: '#fffdee', // Customize primary color
     },
     secondary: {
-      main: '#ff5722', // Customize secondary color (default: orange)
+      main: '#ff5722', // Customize secondary color
     },
     background: {
       default: '#fffdee', // Background color for the entire app
@@ -22,8 +30,9 @@ let theme = createTheme({
     },
   },
   typography: {
-    // fontFamily: dancingScript,
+    // fontFamily: indieFlower.style.fontFamily, // Use the loaded font
     h3: {
+      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
       fontWeight: 700, // Custom font weight for h3
       fontSize: '2.4rem', // Custom font size for h3
     },
@@ -31,14 +40,14 @@ let theme = createTheme({
       fontWeight: 600, // Custom font weight for h5
     },
     h6: {
-      fontWeight: 500, // Custom font weight for h6 (used for mobile titles)
+      fontWeight: 500, // Custom font weight for h6
     },
     body1: {
       fontSize: '1rem', // Default font size for body text
       lineHeight: 1.6, // Line height for better readability
     },
   },
-  spacing: 10, // Base spacing unit (default is 8px)
+  spacing: 10, // Base spacing unit
   components: {
     MuiAppBar: {
       styleOverrides: {
@@ -63,7 +72,5 @@ let theme = createTheme({
     },
   },
 });
-
-// theme = responsiveFontSizes(theme);
 
 export default theme;

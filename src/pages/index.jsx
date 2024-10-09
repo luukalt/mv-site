@@ -12,17 +12,17 @@ export default function Home() {
         Browse through the materials for different subjects. Select a subject to get started.
       </Typography>
 
-      <Grid container spacing={3} display="flex">
+      <Grid container spacing={3} display="flex" marginTop={2}>
           {/* Card 1 */}
           <Grid item xs={12} sm={6} md={4}>
             <Card>
-              <CardActionArea component={Link} href="/pagina1">
+              <CardActionArea component={Link} href="/">
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     Card 1
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Beschrijving voor card 1
+                    Beschrijving voor card 111
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -31,10 +31,10 @@ export default function Home() {
 
           <Grid item xs={12} sm={6} md={4}>
             <Card>
-              <CardActionArea component={Link} href="/pagina1">
+              <CardActionArea component={Link} href="/materials/math">
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Card 1
+                    Card 2
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Beschrijving voor card 1

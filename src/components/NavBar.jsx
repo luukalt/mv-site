@@ -17,8 +17,8 @@ const indieFlower = Indie_Flower({
   weight: ['400'], // Specify the weights you want to use
 });
 
+const Navbar = () => {
 
-export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -139,3 +139,5 @@ export default function Navbar() {
     </AppBar>
   );
 }
+
+export default Navbar
