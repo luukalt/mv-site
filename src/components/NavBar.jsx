@@ -129,7 +129,7 @@ export default function Navbar() {
                   color="inherit" 
                   sx={{ fontFamily: indieFlower.style.fontFamily, fontSize: '1.5rem' }} // Change font size here
                 >
-                  Materiaal 22
+                  Materiaal 2
                 </Button>
               </Link>
             </Box>
