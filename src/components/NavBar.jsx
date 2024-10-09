@@ -116,7 +116,7 @@ const Navbar = () => {
                   Over mij
                 </Button>
               </Link>
-              <Link href="/materials" passHref>
+              <Link href="/contents" passHref>
                 <Button 
                   color="inherit" 
                   sx={{ fontFamily: indieFlower.style.fontFamily, fontSize: '1.5rem' }} // Change font size here
