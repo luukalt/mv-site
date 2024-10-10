@@ -7,9 +7,9 @@ import path from 'path';
 
 const ContentPage = ({ contentItems = [] }) => { // Default to empty array if undefined
   return (
-    <Container maxWidth="lg" sx={{ my: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Content Gallery
+    <Container maxWidth="lg" sx={{ my: 4}}>
+      <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '3rem' }}>
+        Leesideeën
       </Typography>
       <Grid container spacing={2}>
         {contentItems.length > 0 ? (
@@ -22,7 +22,9 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
                   '&:hover': {
                     transform: 'translateY(-5px)',
                     boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
-                    borderRadius: '20px'
+                    borderRadius: '20px',
+                    border: '2px solid #000'
+                    
                   },
                 }}
               >
@@ -33,12 +35,12 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
                     style={{
                       width: '100%',
                       height: '400px',
-                      objectFit: 'cover',
-                    //   borderRadius: '8px',
+                      objectFit: 'fill',
+                      borderRadius: '19px',
                     }}
                   />
                 </a>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography variant="h3" sx={{ mt: 1 }}>
                   {item.name}
                 </Typography>
               </Box>

@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { AppBar, Toolbar, Button, Container, IconButton, Menu, MenuItem, Box } from '@mui/material';
+import { AppBar, Toolbar, Button, Container, IconButton, Menu, MenuItem, Box, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { Dancing_Script, Indie_Flower  } from 'next/font/google';
+import { styled } from '@mui/system';
 
 // Load the Dancing Script font
 const dancingScript = Dancing_Script({
@@ -16,6 +17,19 @@ const indieFlower = Indie_Flower({
   subsets: ['latin'], // Specify the subsets you want to use
   weight: ['400'], // Specify the weights you want to use
 });
+
+const NameTypography = styled(Typography)(({ theme }) => ({
+  flexGrow: 1,
+  [theme.breakpoints.up('md')]: {
+    textAlign: 'left',
+  },
+  [theme.breakpoints.down('sm')]: {
+    textAlign: 'center',
+    width: '100%',
+    position: 'absolute',
+    left: 0,
+  },
+}));
 
 const Navbar = () => {
 
@@ -33,14 +47,20 @@ const Navbar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="md">
-        <Toolbar
+      <Container maxWidth="lg">
+        <Toolbar 
           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'center', // Center horizontally
             alignItems: 'center',
-          }}
-        >
+            height: '100px',
+            width: '100%',
+            margin: '0 auto', // Center the toolbar horizontally
+          }}>
+          <NameTypography variant="h6" sx={{ fontFamily: indieFlower.style.fontFamily, fontSize: '1.5rem'}}>
+            Marieke Versleijen
+          </NameTypography>
+          
           {isMobile ? (
             <>
               <IconButton
@@ -99,7 +119,7 @@ const Navbar = () => {
               </Menu>
             </>
           ) : (
-            <Box sx={{ display: 'flex', gap: 5 }}>
+            <Box sx={{ display: 'flex', gap: 2, flexGrow: 0, marginLeft: 'auto' }}>
               <Link href="/" passHref>
                 <Button 
                   color="inherit" 
