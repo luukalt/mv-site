@@ -19,7 +19,7 @@ export default function Home() {
               <CardActionArea component={Link} href="/">
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Card 1
+                    Card 111
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Beschrijving voor card 111
