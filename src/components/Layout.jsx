@@ -1,5 +1,5 @@
 import { Container, useMediaQuery, useTheme } from '@mui/material';
-import Navbar from './Navbar';
+import Navbar from './NavBar';
 import Navbar2 from './NavBar2';
 
 export default function Layout({ children }) {
