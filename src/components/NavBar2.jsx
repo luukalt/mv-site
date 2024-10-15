@@ -12,7 +12,7 @@ const indieFlower = Indie_Flower({ subsets: ['latin'], weight: ['400'] });
 const menuItems = [
   { text: 'Home', href: '/' },
   { text: 'Over mij', href: '/about' },
-  { text: 'Materiaal', href: '/contents' },
+  { text: 'Lesideeën', href: '/lesideeen' },
   { text: 'Materiaal 2', href: '/materials2' },
 ];
 
