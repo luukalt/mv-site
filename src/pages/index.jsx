@@ -1,6 +1,5 @@
 import { Typography, Grid, Container, Card, CardContent, CardActionArea } from '@mui/material';
 import Link from 'next/link';
-import Layout from '../components/Layout';
 
 export default function Home() {
   return (
@@ -13,115 +12,60 @@ export default function Home() {
       </Typography>
 
       <Grid container spacing={3} display="flex" marginTop={2}>
-          {/* Card 1 */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardActionArea component={Link} href="/about">
-                <CardContent>
-                  <img
-                    src="/Foto Marieke.jpg"
-                    alt="Lesbevordering"
-                    style={{ width: "100%", height: "auto", objectFit: "cover" }} // Ensures the image fits the card
-                  />
-                  <Typography gutterBottom variant="h5" component="div">
-                    Over mij
-                  </Typography>
-                  
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
+        {/* Card 1 */}
+        <Grid item xs={12} sm={6} md={4}>
+          <Card sx={{ height: '100%' }}>
+            <CardActionArea component={Link} href="/about">
+              <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <img
+                  src="/Foto Marieke.jpg"
+                  alt="Lesbevordering"
+                  style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                />
+                <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
+                  Over mij
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardActionArea component={Link} href="/les-ideeen">
-                <CardContent>
-                  <img
-                    src="/les-ideeen.png"
-                    alt="Lesbevordering"
-                    style={{ width: "100%", height: "auto", objectFit: "cover" }} // Ensures the image fits the card
-                  />
-                  <Typography gutterBottom variant="h5" component="div">
-                    Les-ideeën
-                  </Typography>
-                  
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardActionArea component={Link} href="/lesbevordering">
-                <CardContent>
-                  <img
-                    src="/lesbevordering.png"
-                    alt="Lesbevordering"
-                    style={{ width: "100%", height: "auto", objectFit: "cover" }} // Ensures the image fits the card
-                  />
-                  <Typography gutterBottom variant="h5" component="div">
-                    Lesbevordering
-                  </Typography>
-                  
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-          
-          
-      {/* Grid layout for subject cards */}
-      {/* <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center">
-        <Box flexGrow={1} flexBasis="33.33%" p={1}>
-          <Link href="/materials/math" passHref>
-            <CardActionArea>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    Mathhh
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Algebra, Geometry, Calculus, and more.
-                  </Typography>
-                </CardContent>
-              </Card>
+        {/* Card 2 */}
+        <Grid item xs={12} sm={6} md={4}>
+          <Card sx={{ height: '100%' }}>
+            <CardActionArea component={Link} href="/les-ideeen">
+              <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <img
+                  src="/les-ideeen.png"
+                  alt="Les-ideeën"
+                  style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                />
+                <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
+                  Les-ideeën
+                </Typography>
+              </CardContent>
             </CardActionArea>
-          </Link>
-        </Box>
-        <Box flexGrow={1} flexBasis="33.33%" p={1}>
-          <Link href="/materials/science" passHref>
-            <CardActionArea>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    Science
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Physics, Chemistry, Biology, and more.
-                  </Typography>
-                </CardContent>
-              </Card>
+          </Card>
+        </Grid>
+
+        {/* Card 3 */}
+        <Grid item xs={12} sm={6} md={4}>
+          <Card sx={{ height: '100%' }}>
+            <CardActionArea component={Link} href="/lesbevordering">
+              <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <img
+                  src="/lesbevordering.png"
+                  alt="Lesbevordering"
+                  style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                />
+                <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
+                  Lesbevordering
+                </Typography>
+              </CardContent>
             </CardActionArea>
-          </Link>
-        </Box>
-        <Box flexGrow={1} flexBasis="33.33%" p={1}>
-          <Link href="/materials/history" passHref>
-            <CardActionArea>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    History
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Ancient, Medieval, and Modern history.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </CardActionArea>
-          </Link>
-        </Box>
-      </Box> */}
+          </Card>
+        </Grid>
       </Grid>
     </Container>
-
   );
 }
