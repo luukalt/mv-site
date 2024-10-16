@@ -22,7 +22,7 @@ const theme = createTheme({
       main: '#fffdee', // Customize primary color
     },
     secondary: {
-      main: '#ff5722', // Customize secondary color
+      main: '#FFB74D', // Customize secondary color
     },
     background: {
       default: '#fffdee', // Background color for the entire app

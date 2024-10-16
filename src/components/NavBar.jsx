@@ -86,6 +86,12 @@ const Navbar = () => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
+        sx={{
+          '& .MuiPaper-root': {
+            backgroundColor: theme.palette.secondary.main, // Match the AppBar's background color
+            color: 'white', // Set text color to white to match the AppBar style
+          },
+        }}
       >
         {menuItems.map((item) => (
           <MenuItem key={item.href} onClick={handleMenuClose} selected={isActive(item.href)}>
