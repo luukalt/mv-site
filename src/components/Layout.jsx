@@ -1,6 +1,5 @@
 import { Container, useMediaQuery, useTheme } from '@mui/material';
 import Navbar from './NavBar';
-import Navbar2 from './NavBar2';
 
 export default function Layout({ children }) {
   const theme = useTheme();
@@ -9,7 +8,7 @@ export default function Layout({ children }) {
   return (
     <>
       {/* Navbar Component */}
-      <Navbar2 />
+      <Navbar />
       
       {/* Main Content Container */}
       <Container 

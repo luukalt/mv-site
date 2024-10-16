@@ -30,19 +30,27 @@ const theme = createTheme({
     },
   },
   typography: {
+    
     // fontFamily: indieFlower.style.fontFamily, // Use the loaded font
+    h2: {
+      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
+      fontWeight: 700, // Custom font weight for h3
+      // fontSize: '3rem', // Custom font size for h3
+    },
     h3: {
       fontFamily: indieFlower.style.fontFamily, // Use the loaded font
       fontWeight: 700, // Custom font weight for h3
-      fontSize: '2.4rem', // Custom font size for h3
+      // fontSize: '2.4rem', // Custom font size for h3
     },
     h5: {
+      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
       fontWeight: 600, // Custom font weight for h5
     },
     h6: {
       fontWeight: 500, // Custom font weight for h6
     },
     body1: {
+      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
       fontSize: '1rem', // Default font size for body text
       lineHeight: 1.6, // Line height for better readability
     },

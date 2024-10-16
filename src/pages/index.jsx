@@ -4,26 +4,29 @@ import Layout from '../components/Layout';
 
 export default function Home() {
   return (
-    <Container>
-      <Typography variant="h3" gutterBottom display="flex" justifyContent="center" alignItems="center">
-        Welcome to School Materials
+    <Container sx={{ marginTop: 4, textAlign: 'center' }}>
+      <Typography variant="h2" gutterBottom display="flex" justifyContent="center" alignItems="center">
+        Welkom op de site van Marieke Versleijen
       </Typography>
-      <Typography variant="body1" display="flex" justifyContent="center" alignItems="center">
-        Browse through the materials for different subjects. Select a subject to get started.
+      <Typography variant="h5" display="flex" justifyContent="center" alignItems="center">
+        Hier vind je mijn les-ideeën, lesmateriaal en inspiratie voor je lessen.
       </Typography>
 
       <Grid container spacing={3} display="flex" marginTop={2}>
           {/* Card 1 */}
           <Grid item xs={12} sm={6} md={4}>
             <Card>
-              <CardActionArea component={Link} href="/">
+              <CardActionArea component={Link} href="/about">
                 <CardContent>
+                  <img
+                    src="/Foto Marieke.jpg"
+                    alt="Lesbevordering"
+                    style={{ width: "100%", height: "auto", objectFit: "cover" }} // Ensures the image fits the card
+                  />
                   <Typography gutterBottom variant="h5" component="div">
-                    Card 111
+                    Over mij
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Beschrijving voor card 111
-                  </Typography>
+                  
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -31,14 +34,17 @@ export default function Home() {
 
           <Grid item xs={12} sm={6} md={4}>
             <Card>
-              <CardActionArea component={Link} href="/materials/math">
+              <CardActionArea component={Link} href="/les-ideeen">
                 <CardContent>
+                  <img
+                    src="/les-ideeen.png"
+                    alt="Lesbevordering"
+                    style={{ width: "100%", height: "auto", objectFit: "cover" }} // Ensures the image fits the card
+                  />
                   <Typography gutterBottom variant="h5" component="div">
-                    Card 2
+                    Les-ideeën
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Beschrijving voor card 1
-                  </Typography>
+                  
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -46,14 +52,17 @@ export default function Home() {
           
           <Grid item xs={12} sm={6} md={4}>
             <Card>
-              <CardActionArea component={Link} href="/pagina1">
+              <CardActionArea component={Link} href="/lesbevordering">
                 <CardContent>
+                  <img
+                    src="/lesbevordering.png"
+                    alt="Lesbevordering"
+                    style={{ width: "100%", height: "auto", objectFit: "cover" }} // Ensures the image fits the card
+                  />
                   <Typography gutterBottom variant="h5" component="div">
-                    Card 1
+                    Lesbevordering
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Beschrijving voor card 1
-                  </Typography>
+                  
                 </CardContent>
               </CardActionArea>
             </Card>
