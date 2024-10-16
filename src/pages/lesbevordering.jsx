@@ -7,7 +7,7 @@ import path from 'path';
 
 const ContentPage = ({ contentItems = [] }) => { // Default to empty array if undefined
   return (
-    <Container maxWidth="lg" sx={{ my: 4, textAlign: 'center' }}>
+    <Container maxWidth="lg" sx={{ my: 2, textAlign: 'center' }}>
       <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '3rem' }}>
         Lesbevordering
       </Typography>

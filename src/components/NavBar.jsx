@@ -51,6 +51,7 @@ const Navbar = () => {
           fontFamily: indieFlower.style.fontFamily,
           fontSize: '1.2rem',
           borderBottom: isActive(href) ? '2px solid' : 'none',
+          color: isActive(href) ? 'white' : 'black',
           borderRadius: 0,
           '&:hover': { borderBottom: '2px solid' },
         }}

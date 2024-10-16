@@ -20,7 +20,7 @@ export default function Home() {
                 <img
                   src="/Foto Marieke.jpg"
                   alt="Lesbevordering"
-                  style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                 />
                 <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
                   Over mij
@@ -38,7 +38,7 @@ export default function Home() {
                 <img
                   src="/les-ideeen.png"
                   alt="Les-ideeën"
-                  style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                 />
                 <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
                   Les-ideeën
@@ -56,7 +56,7 @@ export default function Home() {
                 <img
                   src="/lesbevordering.png"
                   alt="Lesbevordering"
-                  style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                 />
                 <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
                   Lesbevordering
