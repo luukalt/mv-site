@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <Container sx={{ marginTop: 4, textAlign: 'center' }}>
-      <Typography variant="h2" gutterBottom display="flex" justifyContent="center" alignItems="center">
+      <Typography variant="h3" gutterBottom display="flex" justifyContent="center" alignItems="center">
         Welkom op de site van Marieke Versleijen
       </Typography>
       <Typography variant="h5" display="flex" justifyContent="center" alignItems="center">
