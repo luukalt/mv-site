@@ -71,7 +71,7 @@ const AboutPage = () => {
         Neem ook eens een kijkje op mijn Instagram account.
       </Typography>
       <a href="https://www.instagram.com/mariekeversleijen" target="_blank" rel="noopener noreferrer">
-        <InstagramIcon sx={{ fontSize: 60, color: '#E4405F', display: 'block', margin: '0 auto' }} />
+        <InstagramIcon sx={{ fontSize: 60, color: '#E4405F', display: 'block', margin: '0 auto', mt:2}} />
       </a>
     </Container>
   );
