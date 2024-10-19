@@ -65,6 +65,33 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
   );
 };
 
+// // Fetch content items from public/contents directory
+// export async function getStaticProps() {
+//   const contentsDir = path.join(process.cwd(), 'public', 'contents', 'leesbevordering');
+  
+//   // Check if directory exists
+//   if (!fs.existsSync(contentsDir)) {
+//     return {
+//       props: {
+//         contentItems: [], // Return empty array if the directory doesn't exist
+//       },
+//     };
+//   }
+
+//   const files = fs.readdirSync(contentsDir);
+
+//   // Filter out the PDF files and keep only the names without extensions
+//   const contentItems = files
+//     .filter((file) => file.endsWith('.jpg') || file.endsWith('.png')) // Adjust based on your image types
+//     .map((file) => ({ name: path.parse(file).name })); // Extract names without extensions
+
+//   return {
+//     props: {
+//       contentItems, // Pass content items to the page
+//     },
+//   };
+// }
+
 // Fetch content items from public/contents directory
 export async function getStaticProps() {
   const contentsDir = path.join(process.cwd(), 'public', 'contents', 'leesbevordering');
@@ -80,10 +107,24 @@ export async function getStaticProps() {
 
   const files = fs.readdirSync(contentsDir);
 
-  // Filter out the PDF files and keep only the names without extensions
-  const contentItems = files
+  // Filter out the image files and keep only the names without extensions
+  let contentItems = files
     .filter((file) => file.endsWith('.jpg') || file.endsWith('.png')) // Adjust based on your image types
     .map((file) => ({ name: path.parse(file).name })); // Extract names without extensions
+
+  // Sort the contentItems, placing items with "poster" in the filename at the beginning
+  contentItems = contentItems.sort((a, b) => {
+    const aHasPoster = a.name.toLowerCase().includes('poster');
+    const bHasPoster = b.name.toLowerCase().includes('poster');
+
+    if (aHasPoster && !bHasPoster) {
+      return -1; // "a" comes before "b"
+    } else if (!aHasPoster && bHasPoster) {
+      return 1; // "b" comes before "a"
+    } else {
+      return 0; // No change in order
+    }
+  });
 
   return {
     props: {
@@ -91,5 +132,6 @@ export async function getStaticProps() {
     },
   };
 }
+
 
 export default ContentPage;
