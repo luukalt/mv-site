@@ -57,8 +57,8 @@ const Home = () => {
             <CardActionArea component={Link} href="/lesbevordering">
               <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <img
-                  src="/lesbevordering.png"
-                  alt="Lesbevordering"
+                  src="/leesbevordering.png"
+                  alt="Leesbevordering"
                   style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                 />
                 <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
