@@ -96,7 +96,7 @@ const Navbar = () => {
         color="inherit"
         aria-label="menu"
         onClick={handleMenuOpen}
-        sx={{ position: 'absolute', left: 32, top: 16 }}
+        sx={{ position: 'absolute', left: 32, top: 32 }}
       >
         <MenuIcon sx={{ fontSize: '2rem', color: theme.palette.secondary.main }} />
       </IconButton>
@@ -122,7 +122,7 @@ const Navbar = () => {
 
   return (
     <AppBar
-      position="static"
+      position={isMobile ? "static" : "static"}
       sx={{
         boxShadow: 'none',
         borderBottom: 'none',
