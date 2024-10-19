@@ -45,9 +45,13 @@ const AboutPage = () => {
       </Typography> 
       
       <Typography variant="body1" sx={{ mb: 2 }}>
-        Op deze site vind je lesideeën om in de klas aan de slag te gaan met boeken en activiteiten die ik speciaal heb ontworpen voor leesbevordering. Mijn doel is simpel: zoveel mogelijk kinderen laten ervaren hoe leuk lezen is. 
+        Op deze site vind je lesideeën om in de klas aan de slag te gaan met boeken en activiteiten die ik speciaal heb ontworpen voor leesbevordering. Mijn doel is simpel: zoveel mogelijk kinderen laten ervaren hoe leuk lezen is.
 
-        Naast lesgeven en schrijven ontwerp ik ook lesideeën voor het lidmaatschap van Boekwijzer, volg ik een studie Jeugdliteratuur aan de hogeschool in Leiden, lees ik regelmatig voor in de bibliotheek, ben ik leescoördinator op de school waar ik werk, en doe ik leuke dingen met mijn drie kinderen.
+        Naast lesgeven en schrijven ontwerp ik ook lesideeën voor het lidmaatschap van{' '}
+        <Typography component="a" href="https://www.boekwijzer.com" target="_blank" rel="noopener noreferrer" color="white">
+          Boekwijzer
+        </Typography>
+        , volg ik een studie Jeugdliteratuur aan de hogeschool in Leiden, lees ik regelmatig voor in de bibliotheek, ben ik leescoördinator op de school waar ik werk, en doe ik leuke dingen met mijn drie kinderen.
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 0, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
@@ -64,7 +68,7 @@ const AboutPage = () => {
       
       
       <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-        Klik het Instagram icoon om naar mijn Instagram te gaan!
+        Neem ook eens een kijkje op mijn Instagram account.
       </Typography>
       <a href="https://www.instagram.com/mariekeversleijen" target="_blank" rel="noopener noreferrer">
         <InstagramIcon sx={{ fontSize: 60, color: '#E4405F', display: 'block', margin: '0 auto' }} />

@@ -13,11 +13,11 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
-        ‘Mijn doel is simpel: zoveel mogelijk kinderen laten ervaren hoe leuk lezen is.’
+        ‘Ga morgen nog met een boek aan de slag in de klas!’
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.5rem' }}>
-        Klik op de afbeeldingen om de lesideeën te bekijken. Hierin staat tevens een uitleg voor de les.
+        Klik op de afbeelding om naar het les-idee te gaan.
       </Typography>
       <Grid container spacing={2}>
         {contentItems.length > 0 ? (

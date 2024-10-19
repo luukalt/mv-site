@@ -1,20 +1,23 @@
 import { Typography, Grid, Container, Card, CardContent, CardActionArea } from '@mui/material';
 import Link from 'next/link';
+import { useTheme } from '@mui/material/styles';
 
-export default function Home() {
+// export default function Home() {
+const Home = () => {
+  const theme = useTheme();
   return (
     <Container sx={{ marginTop: 4, textAlign: 'center' }}>
       <Typography variant="h3" gutterBottom display="flex" justifyContent="center" alignItems="center">
         Welkom op de site van Marieke Versleijen
       </Typography>
       <Typography variant="h5" display="flex" justifyContent="center" alignItems="center">
-        Hier vind je mijn les-ideeën, lesmateriaal en inspiratie voor je lessen.
+        Laat alle kinderen ervaren hoe leuk lezen is!
       </Typography>
 
       <Grid container spacing={3} display="flex" marginTop={2}>
         {/* Card 1 */}
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ height: '100%' }}>
+          <Card sx={{ height: '100%', border: '2px solid', borderColor: theme.palette.secondary.main  }}>
             <CardActionArea component={Link} href="/about">
               <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <img
@@ -32,7 +35,7 @@ export default function Home() {
 
         {/* Card 2 */}
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ height: '100%' }}>
+          <Card sx={{ height: '100%', border: '2px solid', borderColor: theme.palette.secondary.main }}>
             <CardActionArea component={Link} href="/les-ideeen">
               <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <img
@@ -50,7 +53,7 @@ export default function Home() {
 
         {/* Card 3 */}
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ height: '100%' }}>
+          <Card sx={{ height: '100%', border: '2px solid', borderColor: theme.palette.secondary.main  }}>
             <CardActionArea component={Link} href="/lesbevordering">
               <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <img
@@ -59,7 +62,7 @@ export default function Home() {
                   style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                 />
                 <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
-                  Lesbevordering
+                  Leesbevordering
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -69,3 +72,5 @@ export default function Home() {
     </Container>
   );
 }
+
+export default Home;

@@ -9,15 +9,15 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
   return (
     <Container maxWidth="lg" sx={{ my: 2, textAlign: 'center' }}>
       <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '3rem' }}>
-        Lesbevordering
+        Leesbevordering
       </Typography>
 
-      <Typography variant="body1" sx={{ mb: 2, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
+      {/* <Typography variant="body1" sx={{ mb: 2, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
         ‘Quote.’
-      </Typography>
+      </Typography> */}
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.5rem' }}>
-        Klik op de afbeeldingen om de inhoud en uitleg te bekijken.
+        Klik op de afbeelding om het leesbevordering materiaal te openen.
       </Typography>
 
       <Grid container spacing={2}>
@@ -37,9 +37,9 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
                   },
                 }}
               >
-                <a href={`/contents/lesbevordering/${item.name}.pdf`} target="_blank" rel="noopener noreferrer">
+                <a href={`/contents/leesbevordering/${item.name}.pdf`} target="_blank" rel="noopener noreferrer">
                   <img
-                    src={`/contents/lesbevordering/${item.name}.png`} // Use .jpg or .png based on your file type
+                    src={`/contents/leesbevordering/${item.name}.png`} // Use .jpg or .png based on your file type
                     alt={item.name}
                     style={{
                       width: '100%',
@@ -67,7 +67,7 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
 
 // Fetch content items from public/contents directory
 export async function getStaticProps() {
-  const contentsDir = path.join(process.cwd(), 'public', 'contents', 'lesbevordering');
+  const contentsDir = path.join(process.cwd(), 'public', 'contents', 'leesbevordering');
   
   // Check if directory exists
   if (!fs.existsSync(contentsDir)) {

@@ -1,16 +1,16 @@
 // theme.js
 
 import { createTheme } from '@mui/material/styles';
-import { Dancing_Script, Indie_Flower } from 'next/font/google';
+import { Gloria_Hallelujah  } from 'next/font/google';
 
-// Load the Dancing Script font
-const dancingScript = Dancing_Script({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
+// // Load the Dancing Script font
+// const dancingScript = Dancing_Script({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+// });
 
 // Load the Indie Flower font
-const indieFlower = Indie_Flower({
+const GloriaHallelujah = Gloria_Hallelujah({
   subsets: ['latin'], 
   weight: ['400'], 
 });
@@ -19,38 +19,39 @@ const indieFlower = Indie_Flower({
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#fffdee', // Customize primary color
+      main: '#edb9a2', // Customize primary color
     },
     secondary: {
-      main: '#FFB74D', // Customize secondary color
+      main: '#074f5b', // Customize secondary color
     },
     background: {
-      default: '#fffdee', // Background color for the entire app
-      paper: '#fffdee', // Background for cards, app bar, etc.
+      default: '#edb9a2', // Background color for the entire app
+      paper: '#edb9a2', // Background for cards, app bar, etc.
     },
   },
   typography: {
     
-    // fontFamily: indieFlower.style.fontFamily, // Use the loaded font
+    fontFamily: GloriaHallelujah.style.fontFamily,
+    // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
     h2: {
-      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
+      // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontWeight: 700, // Custom font weight for h3
       // fontSize: '3rem', // Custom font size for h3
     },
     h3: {
-      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
+      // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontWeight: 700, // Custom font weight for h3
       // fontSize: '2.4rem', // Custom font size for h3
     },
     h5: {
-      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
+      // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontWeight: 600, // Custom font weight for h5
     },
     h6: {
       fontWeight: 500, // Custom font weight for h6
     },
     body1: {
-      fontFamily: indieFlower.style.fontFamily, // Use the loaded font
+      // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontSize: '1rem', // Default font size for body text
       lineHeight: 1.6, // Line height for better readability
     },
@@ -60,8 +61,8 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#FFB74D', // Customize AppBar background
-          height: '64px',
+          backgroundColor: '#edb9a2', // Customize AppBar background
+          height: '80px',
         },
       },
     },
