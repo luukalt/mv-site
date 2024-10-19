@@ -8,7 +8,7 @@ import path from 'path';
 const ContentPage = ({ contentItems = [] }) => { // Default to empty array if undefined
   return (
     <Container maxWidth="lg" sx={{ my: 2, textAlign: 'center' }}>
-      <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '3rem' }}>
+      <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '2.5rem' }}>
         Leesbevordering
       </Typography>
 
@@ -49,7 +49,7 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
                     }}
                   />
                 </a>
-                <Typography variant="body1" sx={{ mt: 1 }}>
+                <Typography variant="h5" sx={{ mt: 1 }}>
                   {item.name}
                 </Typography>
               </Box>

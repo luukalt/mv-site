@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { AppBar, Toolbar, Button, Container, IconButton, Menu, MenuItem, Box, Typography } from '@mui/material';
+import { AppBar, Toolbar, Button, Container, IconButton, Menu, MenuItem, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -28,23 +28,27 @@ const Navbar = () => {
   const isActive = (href) => router.pathname === href;
 
   const Logo = () => (
-    
     <Link href="/" passHref>
-      <Typography
-        variant="h6"
+      <Box
+        component="a"
         sx={{
-          fontFamily: GloriaHallelujah.style.fontFamily,
-          fontSize: isMobile ? '1.25rem' : '1.5rem',
-          cursor: 'pointer',
-          color: 'white',
-          '&:hover': { textDecoration: 'underline' },
-          mt: isMobile? 2 : 1
+          display: 'flex',
+          alignItems: 'center',  // Vertically center the logo
+          height: '100%',
         }}
       >
-        Marieke Versleijen
-      </Typography>
+        <img
+          src={`/mv-logo.png`}
+          alt="Marieke Versleijen Logo"
+          style={{
+            width: isMobile ? '200px' : '200px',
+            height: 'auto', // Ensure the height scales properly
+            objectFit: 'contain',
+            cursor: 'pointer',
+          }}
+        />
+      </Box>
     </Link>
-    
   );
 
   const NavButton = ({ href, children }) => (
@@ -53,21 +57,14 @@ const Navbar = () => {
         color="inherit"
         sx={{
           fontFamily: GloriaHallelujah.style.fontFamily,
-          fontSize: '1.2rem',
-          // borderBottom: isActive(href) ? '2px solid' : 'none',
-          color: isActive(href) ? theme.palette.background.default : 'white',
+          fontSize: '1.5rem',
+          color: isActive(href) ? 'white' : 'black',
           borderRadius: 0,
           '&:hover': { borderBottom: '2px solid' },
-          bgcolor: isMobile? undefined : theme.palette.secondary.main, 
-          paddingBottom: isMobile ? 0 : 1,
-          paddingTop: isMobile ? 0 : 1,
-          paddingLeft: isMobile ? 0 : 2,
-          paddingRight: isMobile ? 0 : 2,
-          display: 'flex',                 // Enable flexbox
-          alignItems: 'center',            // Vertically center the content
-          justifyContent: 'center',        // Horizontally center the content
-          textAlign: 'center',             // Center the text
-          clipPath: isMobile ? '' : 'inset(0px 0px 0px 0px round 20px 30px 60px 60px)'
+          display: 'flex', // Enable flexbox for alignment
+          alignItems: 'center', // Vertically center the content
+          justifyContent: 'center', // Horizontally center the content
+          height: '100%', // Match the height to ensure vertical alignment
         }}
       >
         {children}
@@ -76,7 +73,14 @@ const Navbar = () => {
   );
 
   const DesktopNav = () => (
-    <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1, gap: 3}}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center', // Vertically center the navigation buttons
+        gap: 3, // Space between navigation items
+        height: '100%', // Ensure full height for alignment
+      }}
+    >
       {menuItems.map((item) => (
         <NavButton key={item.href} href={item.href}>
           {item.text}
@@ -94,7 +98,7 @@ const Navbar = () => {
         onClick={handleMenuOpen}
         sx={{ position: 'absolute', left: 32, top: 16 }}
       >
-        <MenuIcon sx={{ fontSize: '2rem', color: theme.palette.primary.main }} />
+        <MenuIcon sx={{ fontSize: '2rem', color: theme.palette.secondary.main }} />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
@@ -102,8 +106,8 @@ const Navbar = () => {
         onClose={handleMenuClose}
         sx={{
           '& .MuiPaper-root': {
-            backgroundColor: theme.palette.secondary.main, // Match the AppBar's background color
-            color: 'white', // Set text color to white to match the AppBar style
+            backgroundColor: theme.palette.primary.main,
+            color: 'white',
           },
         }}
       >
@@ -117,20 +121,26 @@ const Navbar = () => {
   );
 
   return (
-    <AppBar 
+    <AppBar
       position="static"
       sx={{
-        boxShadow: 'none',    // Removes any shadow
-        borderBottom: 'none',  // Ensures there's no bottom border
-        bgcolor: isMobile ? theme.palette.secondary.main: theme.palette.primary.main,  // Set background color to match the rest of the navbar
+        boxShadow: 'none',
+        borderBottom: 'none',
+        bgcolor: theme.palette.primary.main,
       }}
     >
       <Container maxWidth="lg" disableGutters>
-        <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center', height: isMobile ? '60px' : '80px' }}>
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center', // Vertically center the content
+            height: '100px', // Set a fixed height for consistency
+            paddingY: 2,
+          }}
+        >
           {isMobile && <MobileNav />}
-          <Box sx={isMobile ? { position: 'absolute', left: '50%', transform: 'translateX(-50%)'} : {bgcolor: theme.palette.secondary.main, padding: 4, clipPath: 'inset(10px 20px 10px 0px round 30px 40px 60px 80px)'}}>
-            <Logo />
-          </Box>
+          <Logo />
           {!isMobile && <DesktopNav />}
         </Toolbar>
       </Container>

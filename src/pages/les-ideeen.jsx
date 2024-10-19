@@ -7,13 +7,19 @@ import path from 'path';
 
 const ContentPage = ({ contentItems = [] }) => { // Default to empty array if undefined
   return (
-    <Container maxWidth="lg" sx={{ my: 2, textAlign: 'center' }}>
-      <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '3rem' }}>
+    <Container maxWidth="lg" sx={{ my: 0, textAlign: 'center' }}>
+      {/* <Box
+      height={100}
+      bgcolor='white'
+        sx={{ color: 'white'}}
+      >
+      </Box> */}
+      <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '2.5rem'}}>
         Les-ideeën
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
-        ‘Ga morgen nog met een boek aan de slag in de klas!’
+        ‘Ga vandaag nog met een boek aan de slag in de klas!’
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.5rem' }}>

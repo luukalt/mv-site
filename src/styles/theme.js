@@ -19,41 +19,49 @@ const GloriaHallelujah = Gloria_Hallelujah({
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#edb9a2', // Customize primary color
+      main: '#FF914C', // Customize primary color
     },
     secondary: {
       main: '#074f5b', // Customize secondary color
     },
     background: {
-      default: '#edb9a2', // Background color for the entire app
-      paper: '#edb9a2', // Background for cards, app bar, etc.
+      default: '#074f5b', // Background color for the entire app
+      paper: '#074f5b', // Background for cards, app bar, etc.
+    },
+    text: {
+      primary: '#ffffff', // Set global text color to white
     },
   },
   typography: {
     
     fontFamily: GloriaHallelujah.style.fontFamily,
-    // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
+    color: 'white',
     h2: {
       // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontWeight: 700, // Custom font weight for h3
       // fontSize: '3rem', // Custom font size for h3
+      color: 'white',
     },
     h3: {
       // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontWeight: 700, // Custom font weight for h3
       // fontSize: '2.4rem', // Custom font size for h3
+      color: 'white',
     },
     h5: {
       // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontWeight: 600, // Custom font weight for h5
+      color: 'white',
     },
     h6: {
       fontWeight: 500, // Custom font weight for h6
+      color: 'white',
     },
     body1: {
       // fontFamily: GloriaHallelujah.style.fontFamily, // Use the loaded font
       fontSize: '1rem', // Default font size for body text
       lineHeight: 1.6, // Line height for better readability
+      color: 'white',
     },
   },
   spacing: 10, // Base spacing unit
@@ -62,7 +70,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#edb9a2', // Customize AppBar background
-          height: '80px',
+          height: '120px',
         },
       },
     },

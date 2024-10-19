@@ -48,7 +48,7 @@ const AboutPage = () => {
         Op deze site vind je lesideeën om in de klas aan de slag te gaan met boeken en activiteiten die ik speciaal heb ontworpen voor leesbevordering. Mijn doel is simpel: zoveel mogelijk kinderen laten ervaren hoe leuk lezen is.
 
         Naast lesgeven en schrijven ontwerp ik ook lesideeën voor het lidmaatschap van{' '}
-        <Typography component="a" href="https://www.boekwijzer.com" target="_blank" rel="noopener noreferrer" color="white">
+        <Typography component="a" href="https://www.boekwijzer.com" target="_blank" rel="noopener noreferrer" sx={{color: theme.palette.primary.main}} >
           Boekwijzer
         </Typography>
         , volg ik een studie Jeugdliteratuur aan de hogeschool in Leiden, lees ik regelmatig voor in de bibliotheek, ben ik leescoördinator op de school waar ik werk, en doe ik leuke dingen met mijn drie kinderen.
