@@ -22,7 +22,7 @@ const Home = () => {
               <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <img
                   src="/Foto Marieke.jpg"
-                  alt="Lesbevordering"
+                  alt="Leesbevordering"
                   style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '10px' }}
                 />
                 <Typography gutterBottom variant="h5" component="div" sx={{ mt: 2 }}>
@@ -54,7 +54,7 @@ const Home = () => {
         {/* Card 3 */}
         <Grid item xs={12} sm={6} md={4}>
           <Card sx={{ height: '100%', border: '2px solid', borderColor: theme.palette.secondary.main  }}>
-            <CardActionArea component={Link} href="/lesbevordering">
+            <CardActionArea component={Link} href="/leesbevordering">
               <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 <img
                   src="/leesbevordering.png"
