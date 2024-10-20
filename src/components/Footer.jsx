@@ -55,9 +55,9 @@ const Footer = () => {
               Contact
             </Typography>
             <Typography variant="body2">
-              Email: <Link href="mailto:marieke@example.com" color="inherit">marieke@example.com</Link>
+              Email: <Link href="mailto:mariekeversleijen@outlook.com" color="inherit">mariekeversleijen@outlook.com</Link>
             </Typography>
-            <Typography variant="body2">Telefoon: +31 6 12345678</Typography>
+            {/* <Typography variant="body2">Telefoon: +31 6 12345678</Typography> */}
           </Grid>
 
           {/* Social Media Links */}
@@ -66,15 +66,15 @@ const Footer = () => {
               Volg mij
             </Typography>
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <Link href="https://facebook.com" target="_blank" rel="noopener" color="inherit">
+              {/* <Link href="https://facebook.com" target="_blank" rel="noopener" color="inherit">
                 <FacebookIcon />
-              </Link>
+              </Link> */}
               <Link href="https://www.instagram.com/mariekeversleijen" target="_blank" rel="noopener" color="inherit">
                 <InstagramIcon />
               </Link>
-              <Link href="https://twitter.com" target="_blank" rel="noopener" color="inherit">
+              {/* <Link href="https://twitter.com" target="_blank" rel="noopener" color="inherit">
                 <TwitterIcon />
-              </Link>
+              </Link> */}
             </Box>
           </Grid>
         </Grid>

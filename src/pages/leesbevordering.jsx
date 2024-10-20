@@ -17,7 +17,7 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
       </Typography> */}
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.5rem' }}>
-        Klik op de afbeelding om het leesbevordering materiaal te openen.
+        Klik op de afbeelding voor de uitleg en het materiaal.
       </Typography>
 
       <Grid container spacing={2}>

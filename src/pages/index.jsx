@@ -53,8 +53,11 @@ const Home = () => {
               textAlign: isMobile ? 'center' : 'left', // Center text on mobile
             }}
           >
-            Laat alle kinderen ervaren hoe leuk lezen is!
+            Laat alle kinderen <br />
+            ervaren hoe leuk <br />
+            lezen is.
           </Typography>
+          
         </Box>
 
         {/* Right Content: Image */}

@@ -30,7 +30,6 @@ const Navbar = () => {
   const Logo = () => (
     <Link href="/" passHref>
       <Box
-        component="a"
         sx={{
           display: 'flex',
           alignItems: 'center',  // Vertically center the logo
