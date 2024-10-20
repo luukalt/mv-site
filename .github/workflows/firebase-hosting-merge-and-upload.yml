@@ -19,9 +19,12 @@ jobs:
       # Step 3: Install dependencies and build the site
       - run: npm ci && npm run build
 
-      # Step 4: Install Firebase CLI (to use for Firebase Storage operations)
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
+      # Step 4: Install Google Cloud SDK (to use gsutil for Firebase Storage uploads)
+      - name: Install Google Cloud SDK
+        run: |
+          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          sudo apt-get install -y apt-transport-https ca-certificates
+          sudo apt-get update && sudo apt-get install -y google-cloud-sdk
 
       # Step 5: Set up Google Cloud credentials using existing secret
       - name: Set up Google Cloud credentials
@@ -29,11 +32,11 @@ jobs:
           echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARIEKE_VERSLEIJEN }}" > "$HOME/gcloud.json"
           export GOOGLE_APPLICATION_CREDENTIALS="$HOME/gcloud.json"
 
-      # Step 6: Upload PDFs to Firebase Storage from both directories using the project ID
+      # Step 6: Upload PDFs to Firebase Storage using gsutil
       - name: Upload PDFs to Firebase Storage
         run: |
-          firebase storage:upload public/contents/leesbevordering/*.pdf --project marieke-versleijen
-          firebase storage:upload public/contents/les-ideeen/*.pdf --project marieke-versleijen
+          gsutil cp public/contents/leesbevordering/*.pdf gs://marieke-versleijen.appspot.com/leesbevordering/
+          gsutil cp public/contents/les-ideeen/*.pdf gs://marieke-versleijen.appspot.com/les-ideeen/
 
       # Step 7: Deploy to Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
