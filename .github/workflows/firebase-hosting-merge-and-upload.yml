@@ -14,7 +14,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.17.0'  # Adjust this based on your Node.js version requirements
+          node-version: '18.17.0'  # Use Node.js version >= 18.17.0
 
       # Step 3: Install dependencies and build the site
       - run: npm ci && npm run build
@@ -23,18 +23,20 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      # Step 5: Upload PDFs to Firebase Storage from both directories
+      # Step 5: Set up Google Cloud credentials using existing secret
+      - name: Set up Google Cloud credentials
+        run: |
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARIEKE_VERSLEIJEN }}" > "$HOME"/gcloud.json
+          export GOOGLE_APPLICATION_CREDENTIALS="$HOME/gcloud.json"
+
+      # Step 6: Upload PDFs to Firebase Storage from both directories
       - name: Upload PDFs to Firebase Storage
         run: |
-          firebase use --add marieke-versleijen
-          firebase auth:login:ci --token "$(firebase login:ci --token)"
+          firebase use --project marieke-versleijen
           firebase storage:upload public/contents/leesbevordering/*.pdf
           firebase storage:upload public/contents/les-ideeen/*.pdf
 
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARIEKE_VERSLEIJEN }}
-
-      # Step 6: Deploy to Firebase Hosting
+      # Step 7: Deploy to Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
