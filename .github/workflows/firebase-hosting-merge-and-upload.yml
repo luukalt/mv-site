@@ -14,7 +14,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Adjust this based on your Node.js version requirements
+          node-version: '18.17.0'  # Adjust this based on your Node.js version requirements
 
       # Step 3: Install dependencies and build the site
       - run: npm ci && npm run build
