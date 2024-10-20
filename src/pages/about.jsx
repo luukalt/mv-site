@@ -30,7 +30,7 @@ const AboutPage = () => {
         Dat zei mijn vader toen ik hem vertelde dat ik na de Middelbare school naar de Schrijversvakschool wilde. Hij voegde er aan toe dat een baan in het onderwijs mij meer zekerheid zou bieden.
         Na lang wikken en wegen volgde ik zijn advies op. Ik ging naar de Pedagogische academie en werd juf. 
 
-        Al snel merkte ik dat mijn vader gelijk had. In de klas ontdekte ik hoe ik mijn creativiteit kon inzetten. De verhalen die ik schreef, las ik voor aan mijn leerlingen, en ik maakte toneelstukken die we samen opvoerden met alle meesters en juffen. Elke les bood me de kans om iets nieuws te ontwikkelen dat niet alleen aansloot bij de leerdoelen, maar ook bij mijn passie voor boeken.
+        Al snel merkte ik dat mijn vader gelijk had. In de klas ontdekte ik hoe ik mijn creativiteit kon inzetten. De verhalen die ik schreef, las ik voor aan mijn leerlingen en ik maakte toneelstukken die we samen opvoerden met alle meesters en juffen. Elke les bood me de kans om iets nieuws te ontwikkelen dat niet alleen aansloot bij de leerdoelen, maar ook bij mijn passie voor boeken.
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 0, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
@@ -51,7 +51,7 @@ const AboutPage = () => {
         <Typography component="a" href="https://www.boekwijzer.com" target="_blank" rel="noopener noreferrer" sx={{color: theme.palette.primary.main}} >
           Boekwijzer
         </Typography>
-        , volg ik een studie Jeugdliteratuur aan de hogeschool in Leiden, lees ik regelmatig voor in de bibliotheek, ben ik leescoördinator op de school waar ik werk, en doe ik leuke dingen met mijn drie kinderen.
+        , volg ik een studie Jeugdliteratuur aan de hogeschool in Leiden, lees ik regelmatig voor in de bibliotheek, ben ik leescoördinator op de school waar ik werk en doe ik leuke dingen met mijn drie kinderen.
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 0, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
