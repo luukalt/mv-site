@@ -19,11 +19,12 @@ jobs:
       # Step 3: Install dependencies and build the site
       - run: npm ci && npm run build
 
-      # Step 4: Install Google Cloud SDK (to use gsutil for Firebase Storage uploads)
+      # Step 4: Add Google Cloud public GPG key and install Google Cloud SDK
       - name: Install Google Cloud SDK
         run: |
           echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
           sudo apt-get install -y apt-transport-https ca-certificates
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
           sudo apt-get update && sudo apt-get install -y google-cloud-sdk
 
       # Step 5: Set up Google Cloud credentials using existing secret
