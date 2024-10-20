@@ -24,7 +24,7 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
         {contentItems.length > 0 ? (
           contentItems.map((item) => (
             <Grid item xs={12} sm={6} md={4} key={item.name}>
-              <Box
+              {/* <Box
                 sx={{
                   textAlign: 'center',
                   transition: 'transform 0.3s ease',
@@ -40,6 +40,38 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
                 <a href={`/contents/leesbevordering/${item.name}.pdf`} target="_blank" rel="noopener noreferrer">
                   <img
                     src={`/contents/leesbevordering/${item.name}.png`} // Use .jpg or .png based on your file type
+                    alt={item.name}
+                    style={{
+                      width: '100%',
+                      height: '400px',
+                      objectFit: 'fill',
+                      borderRadius: '19px',
+                    }}
+                  />
+                </a>
+                <Typography variant="h5" sx={{ mt: 1 }}>
+                  {item.name}
+                </Typography>
+              </Box> */}
+              <Box
+                sx={{
+                  textAlign: 'center',
+                  transition: 'transform 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
+                    borderRadius: '20px',
+                    border: '2px solid #000'
+                  },
+                }}
+              >
+                <a
+                  href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/leesbevordering/${item.name}.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/leesbevordering/${item.name}.png`} // Use .jpg or .png based on your file type
                     alt={item.name}
                     style={{
                       width: '100%',

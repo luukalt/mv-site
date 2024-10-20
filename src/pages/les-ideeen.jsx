@@ -42,9 +42,15 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
                   },
                 }}
               >
-                <a href={`/contents/les-ideeen/${item.name}.pdf`} target="_blank" rel="noopener noreferrer">
+                {/* <a href={`/contents/les-ideeen/${item.name}.pdf`} target="_blank" rel="noopener noreferrer"> */}
+                <a
+                  href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/les-ideeen/${item.name}.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <img
-                    src={`/contents/les-ideeen/${item.name}.png`} // Use .jpg or .png based on your file type
+                    // src={`/contents/les-ideeen/${item.name}.png`} // Use .jpg or .png based on your file type
+                    src={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/les-ideeen/${item.name}.png`}
                     alt={item.name}
                     style={{
                       width: '100%',
