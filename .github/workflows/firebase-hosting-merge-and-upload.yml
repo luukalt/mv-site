@@ -26,15 +26,14 @@ jobs:
       # Step 5: Set up Google Cloud credentials using existing secret
       - name: Set up Google Cloud credentials
         run: |
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARIEKE_VERSLEIJEN }}" > "$HOME"/gcloud.json
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARIEKE_VERSLEIJEN }}" > "$HOME/gcloud.json"
           export GOOGLE_APPLICATION_CREDENTIALS="$HOME/gcloud.json"
 
-      # Step 6: Upload PDFs to Firebase Storage from both directories
+      # Step 6: Upload PDFs to Firebase Storage from both directories using the project ID
       - name: Upload PDFs to Firebase Storage
         run: |
-          firebase use --project marieke-versleijen
-          firebase storage:upload public/contents/leesbevordering/*.pdf
-          firebase storage:upload public/contents/les-ideeen/*.pdf
+          firebase storage:upload public/contents/leesbevordering/*.pdf --project marieke-versleijen
+          firebase storage:upload public/contents/les-ideeen/*.pdf --project marieke-versleijen
 
       # Step 7: Deploy to Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
