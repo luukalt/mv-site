@@ -12,7 +12,7 @@ const GloriaHallelujah = Gloria_Hallelujah({ subsets: ['latin'], weight: ['400']
 const menuItems = [
   { text: 'Home', href: '/' },
   { text: 'Over mij', href: '/about' },
-  { text: 'Les-ideeën', href: '/les-ideeen' },
+  { text: 'Lesideeën', href: '/lesideeen' },
   { text: 'Leesbevordering', href: '/leesbevordering' },
 ];
 
