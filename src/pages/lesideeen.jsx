@@ -15,7 +15,7 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
       >
       </Box> */}
       <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '2.5rem'}}>
-        Les-ideeën
+        Lesideeën
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
@@ -23,7 +23,7 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.5rem' }}>
-        Klik op de afbeelding om naar het les-idee te gaan.
+        Klik op de afbeelding om naar het lesidee te gaan.
       </Typography>
       <Grid container spacing={2}>
         {contentItems.length > 0 ? (
@@ -42,15 +42,15 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
                   },
                 }}
               >
-                {/* <a href={`/contents/les-ideeen/${item.name}.pdf`} target="_blank" rel="noopener noreferrer"> */}
+                {/* <a href={`/contents/lesideeen/${item.name}.pdf`} target="_blank" rel="noopener noreferrer"> */}
                 <a
-                  href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/les-ideeen/${item.name}.pdf`}
+                  href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/lesideeen/${item.name}.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img
-                    // src={`/contents/les-ideeen/${item.name}.png`} // Use .jpg or .png based on your file type
-                    src={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/les-ideeen/${item.name}.png`}
+                    // src={`/contents/lesideeen/${item.name}.png`} // Use .jpg or .png based on your file type
+                    src={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/lesideeen/${item.name}.png`}
                     alt={item.name}
                     style={{
                       width: '100%',
@@ -78,7 +78,7 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
 
 // Fetch content items from public/contents directory
 export async function getStaticProps() {
-  const contentsDir = path.join(process.cwd(), 'public', 'contents', 'les-ideeen');
+  const contentsDir = path.join(process.cwd(), 'public', 'contents', 'lesideeen');
   
   // Check if directory exists
   if (!fs.existsSync(contentsDir)) {

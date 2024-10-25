@@ -40,9 +40,9 @@ const Footer = () => {
                     Leesbevordering
                 </Typography>
               </Link>
-              <Link href="/les-ideeen" color="inherit" underline="hover">
+              <Link href="/lesideeen" color="inherit" underline="hover">
                 <Typography variant="h6" gutterBottom>
-                    Les-ideeën
+                    Lesideeën
                 </Typography>
                 
               </Link>

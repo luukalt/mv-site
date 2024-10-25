@@ -41,7 +41,7 @@ const AboutPage = () => {
       </Typography> 
 
       <Typography variant="body1" sx={{ mb: 0, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
-        Les-ideeën
+        Lesideeën
       </Typography> 
       
       <Typography variant="body1" sx={{ mb: 2 }}>
