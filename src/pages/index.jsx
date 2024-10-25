@@ -95,7 +95,7 @@ const Home = () => {
         >
           <Box
             component={Link}
-            href="/about"
+            href="/over-mij"
             sx={{
               display: 'flex',
               alignItems: 'center',
