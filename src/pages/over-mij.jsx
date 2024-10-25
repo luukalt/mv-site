@@ -15,7 +15,7 @@ const AboutPage = () => {
       <Box sx={{ mb: 4 }}>
         <img
           src="/Foto Marieke 2.jpg" // Replace with your image path
-          alt="About Me"
+          alt="Over mij"
           style={{ width: isMobile ? '100%' : '75%', height: 'auto', borderRadius: isMobile ? '25px' : '50px' }}
         />
       </Box>
