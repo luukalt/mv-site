@@ -30,7 +30,7 @@ const Footer = () => {
                     Home
                 </Typography>
               </Link>
-              <Link href="/about" color="inherit" underline="hover">
+              <Link href="/over-mij" color="inherit" underline="hover">
                 <Typography variant="h6" gutterBottom>
                     Over Mij
                 </Typography>
