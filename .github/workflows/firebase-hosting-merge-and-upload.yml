@@ -37,7 +37,7 @@ jobs:
       - name: Upload PDFs to Firebase Storage
         run: |
           gsutil cp public/contents/leesbevordering/*.pdf gs://marieke-versleijen.appspot.com/leesbevordering/
-          gsutil cp public/contents/les-ideeen/*.pdf gs://marieke-versleijen.appspot.com/les-ideeen/
+          gsutil cp public/contents/lesideeen/*.pdf gs://marieke-versleijen.appspot.com/lesideeen/
 
       # Step 7: Deploy to Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0

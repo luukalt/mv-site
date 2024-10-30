@@ -95,7 +95,7 @@ const Home = () => {
         >
           <Box
             component={Link}
-            href="/about"
+            href="/over-mij"
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -179,7 +179,7 @@ const Home = () => {
         >
           <Box
             component={Link}
-            href="/les-ideeen"
+            href="/lesideeen"
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -200,8 +200,8 @@ const Home = () => {
           >
             <Box
               component="img"
-              src="/les-ideeen2.png"
-              alt="Les-ideeen"
+              src="/lesideeen2.png"
+              alt="Lesideeen"
               sx={{
                 width: '100%',
                 height: '100%',
