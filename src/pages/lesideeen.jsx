@@ -44,7 +44,8 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
               >
                 {/* <a href={`/contents/lesideeen/${item.name}.pdf`} target="_blank" rel="noopener noreferrer"> */}
                 <a
-                  href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/lesideeen/${item.name}.pdf`}
+                  // href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/lesideeen/${item.name}.pdf`}
+                  href={`https://luukalt.github.io/mv-site/public/contents/lesideeen/${item.name}.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
