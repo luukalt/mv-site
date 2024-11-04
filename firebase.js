@@ -1,16 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// import { getStorage, ref, listAll, getDownloadURL, getMetadata } from 'firebase/storage';
-import { getAuth, signInWithPopup, signInWithEmailPassword, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata } from 'firebase/storage';
-
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, doc, setDoc, collection, getDocs, query, orderBy, updateDoc } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCjbYAlKbny0xwz-QRGMeoBUsF0ZZfoETo",
   authDomain: "marieke-versleijen.firebaseapp.com",
@@ -22,7 +16,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // Firebase Authentication
@@ -32,8 +25,30 @@ const provider = new GoogleAuthProvider();
 // Firebase Storage
 const storage = getStorage(app);
 
-// Export auth and provider for sign-in
-// export { };
+// Firebase Firestore
+const db = getFirestore(app);
 
-// Export storage and common Storage functions
-export { auth, provider, signInWithPopup, signInWithEmailPassword, storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata};
+// Export necessary Firebase services and utilities
+export {
+  app,
+  auth,
+  provider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  storage,
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+  deleteObject,
+  getMetadata,
+  updateMetadata,
+  db,              // Firestore instance
+  doc,
+  setDoc,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  updateDoc
+};
