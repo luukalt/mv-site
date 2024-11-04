@@ -42,9 +42,9 @@ jobs:
       # Upload leesbevordering folder to Firebase Storage
       - name: Upload leesbevordering to Firebase Storage
         run: |
-          gsutil -m cp -r public/contents/leesbevordering gs://marieke-versleijen.appspot.com/contents/leesbevordering
+          gsutil -m rsync -r public/contents/leesbevordering/ gs://marieke-versleijen.appspot.com/contents/leesbevordering
 
       # Upload lesideeen folder to Firebase Storage
       - name: Upload lesideeen to Firebase Storage
         run: |
-          gsutil -m cp -r public/contents/lesideeen gs://marieke-versleijen.appspot.com/contents/lesideeen
+          gsutil -m rsync -r public/contents/lesideeen/ gs://marieke-versleijen.appspot.com/contents/lesideeen
