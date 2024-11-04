@@ -2,30 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import { storage, ref, listAll, getDownloadURL, getMetadata } from '../../firebase';
 
-const CACHE_KEY = 'contentItems';
-const CACHE_EXPIRATION_KEY = 'cacheExpiration';
+const CACHE_KEY = 'contentItems_leesbevordering';
+const CACHE_EXPIRATION_KEY = 'cacheExpiration_leesbevordering';
 const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 const ContentPage = ({ initialContentItems }) => {
   const [contentItems, setContentItems] = useState(initialContentItems);
 
   useEffect(() => {
-    // Check for cached data on the client side
     const cachedContentItems = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
     const cacheExpiration = localStorage.getItem(CACHE_EXPIRATION_KEY);
 
     if (cacheExpiration && Date.now() < parseInt(cacheExpiration, 10)) {
-      // Use cached content items if the cache is still valid
       setContentItems(cachedContentItems);
     } else {
-      // Otherwise, fetch fresh data and update cache
       fetchContentItems();
     }
   }, []);
 
   const fetchContentItems = async () => {
     try {
-      const listRef = ref(storage, 'contents/leesbevordering');
+      const listRef = ref(storage, 'contents/leesbevordering'); // Explicitly set to `leesbevordering`
       const list = await listAll(listRef);
       const newContentItems = [];
 
@@ -44,14 +41,10 @@ const ContentPage = ({ initialContentItems }) => {
         }
       }
 
-      // Sort by the 'order' field in ascending order
       newContentItems.sort((a, b) => a.order - b.order);
 
-      // Cache the result in localStorage
       localStorage.setItem(CACHE_KEY, JSON.stringify(newContentItems));
       localStorage.setItem(CACHE_EXPIRATION_KEY, (Date.now() + CACHE_DURATION_MS).toString());
-
-      // Update the state with the new items
       setContentItems(newContentItems);
     } catch (error) {
       console.error('Error fetching content from Firebase Storage:', error);
@@ -142,7 +135,7 @@ async function fetchContentItemsServer() {
   const contentItems = [];
 
   try {
-    const listRef = ref(storage, 'contents/leesbevordering');
+    const listRef = ref(storage, 'contents/leesbevordering'); // Explicitly set to `leesbevordering`
     const list = await listAll(listRef);
 
     for (const item of list.items) {
@@ -160,7 +153,6 @@ async function fetchContentItemsServer() {
       }
     }
 
-    // Sort by the 'order' field in ascending order
     contentItems.sort((a, b) => a.order - b.order);
   } catch (error) {
     console.error('Error fetching content from Firebase Storage:', error);

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { auth, provider, signInWithPopup, getRedirectResult, storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata } from '../../firebase';
-import { signOut } from 'firebase/auth';
-import { Button, Container, Typography, Box, Input, Select, MenuItem } from '@mui/material';
+import { Button, Container, Typography, Box, Input, Select, MenuItem, TextField } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { 
+    signInWithEmailAndPassword, 
+    signOut,  
+  } from 'firebase/auth'
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
@@ -10,8 +13,10 @@ const AdminPage = () => {
   const [pdfUpload, setPdfUpload] = useState(null);
   const [pngUpload, setPngUpload] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState('leesbevordering');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const allowedEmails = ['luukaltenburg@gmail.com', 'anotheremail@example.com']; // List of allowed emails
+  const allowedEmails = ['luukaltenburg@gmail.com', 'mariekeversleijen@outlook.com']; // List of allowed emails
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -36,9 +41,24 @@ const AdminPage = () => {
     }
   }, []);
 
-  const signIn = async () => {
+//   const signInWithGoogle = async () => {
+//     try {
+//       const result = await signInWithPopup(auth, provider);
+//       if (allowedEmails.includes(result.user.email)) {
+//         setUser(result.user);
+//         localStorage.setItem('user', JSON.stringify(result.user));
+//       } else {
+//         await signOut(auth);
+//         alert('Access denied.');
+//       }
+//     } catch (error) {
+//       console.error("Error signing in with Google:", error);
+//     }
+//   };
+
+  const signInWithEmailPassword = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithEmailAndPassword(auth, email, password);
       if (allowedEmails.includes(result.user.email)) {
         setUser(result.user);
         localStorage.setItem('user', JSON.stringify(result.user));
@@ -47,7 +67,17 @@ const AdminPage = () => {
         alert('Access denied.');
       }
     } catch (error) {
-      console.error("Error signing in:", error);
+      console.error("Error signing in with email and password:", error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      localStorage.removeItem('user');
+    } catch (error) {
+      console.error("Error signing out:", error);
     }
   };
 
@@ -145,7 +175,7 @@ const AdminPage = () => {
       });
 
       await Promise.all(updatePromises);
-      alert("Order saved successfully!");
+      alert("De volgorde is opgeslagen!");
     } catch (error) {
       console.error("Error saving order:", error);
     }
@@ -159,12 +189,32 @@ const AdminPage = () => {
     <Container>
       <Typography variant="h3" gutterBottom sx={{ my: 2, textAlign: 'center' }}>Admin Pagina</Typography>
       {!user ? (
-        <Button variant="contained" onClick={signIn} sx={{ my: 2, textAlign: 'center' }}>Log in met Google</Button>
+        <Box sx={{ textAlign: 'center' }}>
+            <TextField
+            label="Email"
+            variant="outlined"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            sx={{ mb: 2, width: '100%' }}
+            />
+            <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            sx={{ mb: 2, width: '100%' }}
+            />
+            <Button variant="contained" onClick={signInWithEmailPassword} sx={{ mb: 2,}}>Log in</Button>
+            {/* <Button variant="contained" onClick={signInWithGoogle} sx={{ mb: 2 }}>Log in with Google</Button> */}
+        </Box>
       ) : (
         <>
-          <Typography variant="h5" gutterBottom sx={{ my: 2, textAlign: 'center' }}>Welkom, {user.displayName}</Typography>
-
+          <Typography variant="h5" gutterBottom sx={{ my: 2, textAlign: 'center' }}>Welkom, {user.email}</Typography>
+          
           <Box sx={{ my: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+            <Button variant="contained" color="error" onClick={handleSignOut} sx={{ mb: 4 }}>Sign Out</Button>
+
             <Select
               value={selectedFolder}
               onChange={(e) => setSelectedFolder(e.target.value)}

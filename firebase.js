@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 // import { getStorage, ref, listAll, getDownloadURL, getMetadata } from 'firebase/storage';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithPopup, signInWithEmailPassword, GoogleAuthProvider } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata } from 'firebase/storage';
 
 
@@ -33,7 +33,7 @@ const provider = new GoogleAuthProvider();
 const storage = getStorage(app);
 
 // Export auth and provider for sign-in
-export { auth, provider, signInWithPopup };
+// export { };
 
 // Export storage and common Storage functions
-export { storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata};
+export { auth, provider, signInWithPopup, signInWithEmailPassword, storage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata};
