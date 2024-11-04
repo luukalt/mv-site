@@ -1,8 +1,6 @@
 import React from 'react';
 import { Container, Grid, Box, Typography } from '@mui/material';
-
-const GITHUB_REPO = 'luukalt/mv-site';
-const CONTENTS_PATH = 'public/contents/leesbevordering';
+import { storage, ref, listAll, getDownloadURL } from '../../firebase'; // Adjust the path as needed
 
 const ContentPage = ({ contentItems = [] }) => {
   return (
@@ -32,7 +30,7 @@ const ContentPage = ({ contentItems = [] }) => {
                   },
                 }}
               >
-                {index === 0 && ( // Add "Nieuw" sticker only to the newest item
+                {index === 0 && (
                   <img
                     src="/nieuw.png" // Update this path to your image location
                     alt="Nieuw"
@@ -40,19 +38,19 @@ const ContentPage = ({ contentItems = [] }) => {
                       position: 'absolute',
                       bottom: '60px',
                       right: '10px',
-                      width: '150px',  // Adjust width and height as needed
+                      width: '150px',
                       height: 'auto',
                       borderRadius: 10
                     }}
                   />
                 )}
                 <a
-                  href={`https://github.com/${GITHUB_REPO}/blob/main/${CONTENTS_PATH}/${item.name}.pdf?raw=true`}
+                  href={item.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img
-                    src={`https://raw.githubusercontent.com/${GITHUB_REPO}/main/${CONTENTS_PATH}/${item.name}.png`}
+                    src={item.imageUrl}
                     alt={item.name}
                     style={{
                       width: '100%',
@@ -79,33 +77,36 @@ const ContentPage = ({ contentItems = [] }) => {
 };
 
 export async function getStaticProps() {
-  const fileListResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${CONTENTS_PATH}`);
-  const files = await fileListResponse.json();
+  const contentItems = [];
 
-  // Fetch the latest commit dates for each file
-  const contentItems = await Promise.all(
-    files
-      .filter((file) => file.name.endsWith('.jpg') || file.name.endsWith('.png'))
-      .map(async (file) => {
-        const commitResponse = await fetch(
-          `https://api.github.com/repos/${GITHUB_REPO}/commits?path=${CONTENTS_PATH}/${file.name}&per_page=1`
-        );
-        const commits = await commitResponse.json();
-        const lastModified = commits[0]?.commit?.committer?.date || null;
+  try {
+    // Reference to the specific folder in Firebase Storage
+    const listRef = ref(storage, 'contents/leesbevordering');
+    const list = await listAll(listRef);
 
-        return {
-          name: file.name.split('.').slice(0, -1).join('.'),
-          updated_at: lastModified,
-        };
-      })
-  );
+    // Retrieve URLs for PDFs and images
+    for (const item of list.items) {
+      const itemUrl = await getDownloadURL(item);
+      const itemName = item.name.split('.').slice(0, -1).join('.');
 
-  // Sort items by last modified date, newest first
-  contentItems.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+      if (item.name.endsWith('.pdf')) {
+        contentItems.push({
+          name: itemName,
+          pdfUrl: itemUrl,
+          imageUrl: itemUrl.replace('.pdf', '.png') // Assuming the image file has the same name but with a .png extension
+        });
+      }
+    }
+
+    // Sort items by name or any other criteria
+    contentItems.sort((a, b) => (a.name > b.name ? -1 : 1));
+  } catch (error) {
+    console.error('Error fetching content from Firebase Storage:', error);
+  }
 
   return {
     props: {
-      contentItems: contentItems.map(({ updated_at, ...rest }) => rest), // Exclude updated_at from props
+      contentItems,
     },
   };
 }
