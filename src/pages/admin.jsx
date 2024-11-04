@@ -159,7 +159,7 @@ const AdminPage = () => {
     <Container>
       <Typography variant="h3" gutterBottom sx={{ my: 2, textAlign: 'center' }}>Admin Pagina</Typography>
       {!user ? (
-        <Button variant="contained" onClick={signIn}>Log in met Google</Button>
+        <Button variant="contained" onClick={signIn} sx={{ my: 2, textAlign: 'center' }}>Log in met Google</Button>
       ) : (
         <>
           <Typography variant="h5" gutterBottom sx={{ my: 2, textAlign: 'center' }}>Welkom, {user.displayName}</Typography>
