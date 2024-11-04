@@ -12,11 +12,11 @@ const ContentPage = ({ initialContentItems }) => {
   useEffect(() => {
     const cachedContentItems = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
     const cacheExpiration = localStorage.getItem(CACHE_EXPIRATION_KEY);
-
-    if (cacheExpiration && Date.now() < parseInt(cacheExpiration, 10)) {
-      setContentItems(cachedContentItems);
-    } else {
-      fetchContentItems();
+  
+    setContentItems(cachedContentItems.length > 0 ? cachedContentItems : initialContentItems);
+  
+    if (!cacheExpiration || Date.now() > parseInt(cacheExpiration, 10)) {
+      fetchContentItems(); // Refresh cache in the background
     }
   }, []);
 
