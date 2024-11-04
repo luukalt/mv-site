@@ -47,7 +47,7 @@ const ContentPage = ({ contentItems = [] }) => {
                   />
                 )}
                 <a
-                  href={`https://github.com/${GITHUB_REPO}/blob/main/${CONTENTS_PATH}/${item.name}.pdf?raw=true`}
+                  href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/leesbevordering/${item.name}.pdf`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

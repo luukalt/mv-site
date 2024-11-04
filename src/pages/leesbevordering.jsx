@@ -1,20 +1,68 @@
-// pages/content.jsx
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Grid, Box, Typography } from '@mui/material';
-import fs from 'fs';
-import path from 'path';
+import { storage, ref, listAll, getDownloadURL, getMetadata } from '../../firebase';
 
-const ContentPage = ({ contentItems = [] }) => { // Default to empty array if undefined
+const CACHE_KEY = 'contentItems';
+const CACHE_EXPIRATION_KEY = 'cacheExpiration';
+const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+const ContentPage = ({ initialContentItems }) => {
+  const [contentItems, setContentItems] = useState(initialContentItems);
+
+  useEffect(() => {
+    // Check for cached data on the client side
+    const cachedContentItems = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
+    const cacheExpiration = localStorage.getItem(CACHE_EXPIRATION_KEY);
+
+    if (cacheExpiration && Date.now() < parseInt(cacheExpiration, 10)) {
+      // Use cached content items if the cache is still valid
+      setContentItems(cachedContentItems);
+    } else {
+      // Otherwise, fetch fresh data and update cache
+      fetchContentItems();
+    }
+  }, []);
+
+  const fetchContentItems = async () => {
+    try {
+      const listRef = ref(storage, 'contents/leesbevordering');
+      const list = await listAll(listRef);
+      const newContentItems = [];
+
+      for (const item of list.items) {
+        const itemUrl = await getDownloadURL(item);
+        const metadata = await getMetadata(item);
+        const itemName = item.name.split('.').slice(0, -1).join('.');
+
+        if (item.name.endsWith('.png')) {
+          newContentItems.push({
+            name: itemName,
+            pdfUrl: itemUrl.replace('.png', '.pdf'),
+            imageUrl: itemUrl,
+            order: metadata.customMetadata?.order ? parseInt(metadata.customMetadata.order, 10) : 0,
+          });
+        }
+      }
+
+      // Sort by the 'order' field in ascending order
+      newContentItems.sort((a, b) => a.order - b.order);
+
+      // Cache the result in localStorage
+      localStorage.setItem(CACHE_KEY, JSON.stringify(newContentItems));
+      localStorage.setItem(CACHE_EXPIRATION_KEY, (Date.now() + CACHE_DURATION_MS).toString());
+
+      // Update the state with the new items
+      setContentItems(newContentItems);
+    } catch (error) {
+      console.error('Error fetching content from Firebase Storage:', error);
+    }
+  };
+
   return (
     <Container maxWidth="lg" sx={{ my: 2, textAlign: 'center' }}>
       <Typography variant="h3" gutterBottom align="center" sx={{ fontSize: '2.5rem' }}>
         Leesbevordering
       </Typography>
-
-      {/* <Typography variant="body1" sx={{ mb: 2, fontSize: '1.2rem', fontStyle: 'italic', fontWeight: 'bold' }}>
-        ‘Quote.’
-      </Typography> */}
 
       <Typography variant="body1" sx={{ mb: 2, fontSize: '1.5rem' }}>
         Klik op de afbeelding voor de uitleg en het materiaal.
@@ -22,56 +70,38 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
 
       <Grid container spacing={2}>
         {contentItems.length > 0 ? (
-          contentItems.map((item) => (
+          contentItems.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={item.name}>
-              {/* <Box
-                sx={{
-                  textAlign: 'center',
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
-                    borderRadius: '20px',
-                    border: '2px solid #000'
-                    
-                  },
-                }}
-              >
-                <a href={`/contents/leesbevordering/${item.name}.pdf`} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={`/contents/leesbevordering/${item.name}.png`} // Use .jpg or .png based on your file type
-                    alt={item.name}
-                    style={{
-                      width: '100%',
-                      height: '400px',
-                      objectFit: 'fill',
-                      borderRadius: '19px',
-                    }}
-                  />
-                </a>
-                <Typography variant="h5" sx={{ mt: 1 }}>
-                  {item.name}
-                </Typography>
-              </Box> */}
               <Box
                 sx={{
+                  position: 'relative',
                   textAlign: 'center',
                   transition: 'transform 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
                     boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
                     borderRadius: '20px',
-                    border: '2px solid #000'
+                    border: '2px solid #000',
                   },
                 }}
               >
-                <a
-                  href={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/leesbevordering/${item.name}.pdf`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                {index === 0 && (
                   <img
-                    src={`https://raw.githubusercontent.com/luukalt/mv-site/main/public/contents/leesbevordering/${item.name}.png`} // Use .jpg or .png based on your file type
+                    src="/nieuw.png"
+                    alt="Nieuw"
+                    style={{
+                      position: 'absolute',
+                      bottom: '60px',
+                      right: '10px',
+                      width: '150px',
+                      height: 'auto',
+                      borderRadius: 10,
+                    }}
+                  />
+                )}
+                <a href={item.pdfUrl} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={item.imageUrl}
                     alt={item.name}
                     style={{
                       width: '100%',
@@ -97,73 +127,46 @@ const ContentPage = ({ contentItems = [] }) => { // Default to empty array if un
   );
 };
 
-// // Fetch content items from public/contents directory
-// export async function getStaticProps() {
-//   const contentsDir = path.join(process.cwd(), 'public', 'contents', 'leesbevordering');
-  
-//   // Check if directory exists
-//   if (!fs.existsSync(contentsDir)) {
-//     return {
-//       props: {
-//         contentItems: [], // Return empty array if the directory doesn't exist
-//       },
-//     };
-//   }
-
-//   const files = fs.readdirSync(contentsDir);
-
-//   // Filter out the PDF files and keep only the names without extensions
-//   const contentItems = files
-//     .filter((file) => file.endsWith('.jpg') || file.endsWith('.png')) // Adjust based on your image types
-//     .map((file) => ({ name: path.parse(file).name })); // Extract names without extensions
-
-//   return {
-//     props: {
-//       contentItems, // Pass content items to the page
-//     },
-//   };
-// }
-
-// Fetch content items from public/contents directory
+// Fetch data on the server side
 export async function getStaticProps() {
-  const contentsDir = path.join(process.cwd(), 'public', 'contents', 'leesbevordering');
-  
-  // Check if directory exists
-  if (!fs.existsSync(contentsDir)) {
-    return {
-      props: {
-        contentItems: [], // Return empty array if the directory doesn't exist
-      },
-    };
-  }
-
-  const files = fs.readdirSync(contentsDir);
-
-  // Filter out the image files and keep only the names without extensions
-  let contentItems = files
-    .filter((file) => file.endsWith('.jpg') || file.endsWith('.png')) // Adjust based on your image types
-    .map((file) => ({ name: path.parse(file).name })); // Extract names without extensions
-
-  // Sort the contentItems, placing items with "poster" in the filename at the beginning
-  contentItems = contentItems.sort((a, b) => {
-    const aHasPoster = a.name.toLowerCase().includes('poster');
-    const bHasPoster = b.name.toLowerCase().includes('poster');
-
-    if (aHasPoster && !bHasPoster) {
-      return -1; // "a" comes before "b"
-    } else if (!aHasPoster && bHasPoster) {
-      return 1; // "b" comes before "a"
-    } else {
-      return 0; // No change in order
-    }
-  });
-
+  const contentItems = await fetchContentItemsServer();
   return {
     props: {
-      contentItems, // Pass content items to the page
+      initialContentItems: contentItems,
     },
   };
 }
 
+// Helper function to fetch content items on the server side
+async function fetchContentItemsServer() {
+  const contentItems = [];
+
+  try {
+    const listRef = ref(storage, 'contents/leesbevordering');
+    const list = await listAll(listRef);
+
+    for (const item of list.items) {
+      const itemUrl = await getDownloadURL(item);
+      const metadata = await getMetadata(item);
+      const itemName = item.name.split('.').slice(0, -1).join('.');
+
+      if (item.name.endsWith('.png')) {
+        contentItems.push({
+          name: itemName,
+          pdfUrl: itemUrl.replace('.png', '.pdf'),
+          imageUrl: itemUrl,
+          order: metadata.customMetadata?.order ? parseInt(metadata.customMetadata.order, 10) : 0,
+        });
+      }
+    }
+
+    // Sort by the 'order' field in ascending order
+    contentItems.sort((a, b) => a.order - b.order);
+  } catch (error) {
+    console.error('Error fetching content from Firebase Storage:', error);
+  }
+
+  return contentItems;
+}
 
 export default ContentPage;
