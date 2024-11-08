@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata } from 'firebase/storage';
 import { getFirestore, doc, setDoc, collection, getDocs, query, orderBy, updateDoc } from 'firebase/firestore';
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,6 +18,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+let analytics;
+
+if (typeof window !== "undefined") {
+  isSupported().then((supported) => {
+    if (supported) {
+      analytics = getAnalytics(app);
+    }
+  });
+}
+
 
 // Firebase Authentication
 const auth = getAuth(app);
@@ -33,6 +45,7 @@ export {
   app,
   auth,
   provider,
+  analytics,
   signInWithPopup,
   signInWithEmailAndPassword,
   storage,
