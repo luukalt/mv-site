@@ -31,6 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Generate package-lock.json if missing
+      - run: npm i --package-lock-only
+      # Run audit with moderate level
       - run: npm audit --audit-level=moderate
       - run: npm audit fix
       - run: npm ci && npm run build
@@ -42,4 +45,5 @@ jobs:
           projectId: marieke-versleijen
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
+
 
