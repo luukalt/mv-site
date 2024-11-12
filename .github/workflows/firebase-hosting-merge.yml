@@ -34,9 +34,9 @@ jobs:
       # Generate package-lock.json if missing
       - run: npm i --package-lock-only
       # Run audit with moderate level
-      - run: npm audit --audit-level=moderate
-        continue-on-error: true
-      - run: npm audit fix
+      # - run: npm audit --audit-level=moderate
+        # continue-on-error: true
+      # - run: npm audit fix
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
