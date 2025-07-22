@@ -35,6 +35,11 @@ const Footer = () => {
                     Over Mij
                 </Typography>
               </Link>
+              <Link href="/boekwijzer" color="inherit" underline="hover">
+                <Typography variant="h6" gutterBottom>
+                    Boekwijzer
+                </Typography>
+              </Link>
               <Link href="/leesbevordering" color="inherit" underline="hover">
                 <Typography variant="h6" gutterBottom>
                     Leesbevordering
@@ -43,8 +48,7 @@ const Footer = () => {
               <Link href="/lesideeen" color="inherit" underline="hover">
                 <Typography variant="h6" gutterBottom>
                     Lesideeën
-                </Typography>
-                
+                </Typography> 
               </Link>
             </Box>
           </Grid>

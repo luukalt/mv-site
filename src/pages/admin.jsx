@@ -190,11 +190,13 @@ const AdminPage = () => {
           <Button variant="contained" color="error" onClick={handleSignOut} sx={{ mb: 4 }}>Sign Out</Button>
 
           <Typography variant="body1" sx={{ mb: 1, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>Materiaal toevoegen (PDF en PNG moeten dezelfde naam hebben)</Typography>
-          <Typography variant="body1" sx={{ mb: 1, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>Kies 'Lesideeen' of 'Leesbevordering'</Typography>
+          <Typography variant="body1" sx={{ mb: 1, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>Kies 'Lesideeen'/'Leesbevordering'/'Boekwijzer'</Typography>
           
             <Select value={selectedFolder} onChange={(e) => setSelectedFolder(e.target.value)} sx={{ mb: 1,  backgroundColor: '#FF914C', color: 'black',}}>
               <MenuItem value="leesbevordering">Leesbevordering</MenuItem>
               <MenuItem value="lesideeen">Lesideeën</MenuItem>
+              <MenuItem value="boekwijzer">Boekwijzer</MenuItem>
+              
             </Select>
           </Box>
           <Box sx={{ mb: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2, justifyContent: 'center' }}>
