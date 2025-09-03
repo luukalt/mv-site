@@ -109,7 +109,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Container, Grid, Box, Typography } from '@mui/material';
-import { db } from './firebase';
+import { db } from '../../firebase';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 const HOSTING_BASE_URL = 'https://marieke-versleijen.web.app';
