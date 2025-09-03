@@ -11,8 +11,8 @@
     },
     "rewrites": [
       {
-        "source": "/contents/**",
-        "destination": "https://firebasestorage.googleapis.com/v0/b/marieke-versleijen.appspot.com/o/contents%2F"
+        "source": "/contents/:splat",
+        "destination": "https://firebasestorage.googleapis.com/v0/b/marieke-versleijen.appspot.com/o/contents%2F:splat?alt=media"
       }
     ]
   }
