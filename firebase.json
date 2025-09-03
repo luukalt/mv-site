@@ -1,8 +1,6 @@
-
 {
   "hosting": {
     "source": ".",
-    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -14,7 +12,7 @@
     "rewrites": [
       {
         "source": "/contents/**",
-        "destination": "https://firebasestorage.googleapis.com/v0/b/[your-bucket-name].appspot.com/o/contents%2F"
+        "destination": "https://firebasestorage.googleapis.com/v0/b/marieke-versleijen.appspot.com/o/contents%2F"
       }
     ]
   }
