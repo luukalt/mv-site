@@ -9,10 +9,11 @@
     "frameworksBackend": {
       "region": "europe-west1"
     },
-    "rewrites": [
+    "redirects": [
       {
         "source": "/contents/**",
-        "destination": "https://firebasestorage.googleapis.com/v0/b/marieke-versleijen.appspot.com/o/contents%2F"
+        "destination": "https://firebasestorage.googleapis.com/v0/b/marieke-versleijen.appspot.com/o/contents/:splat?alt=media",
+        "type": 302
       }
     ]
   }
