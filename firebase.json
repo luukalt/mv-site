@@ -12,7 +12,7 @@
     "rewrites": [
       {
         "source": "/contents/**",
-        "destination": "https://firebasestorage.googleapis.com/v0/b/marieke-versleijen.appspot.com/o/contents/:splat?alt=media"
+        "destination": "https://firebasestorage.googleapis.com/v0/b/marieke-versleijen.appspot.com/o/contents/**?alt=media"
       }
     ]
   }
