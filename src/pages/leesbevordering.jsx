@@ -248,10 +248,15 @@ const ContentPage = () => {
             )
           : '';
         const newImageUrl = data.imageUrl
-          ? decodeURIComponent(
-              data.imageUrl.replace(FIREBASE_STORAGE_BASE_URL, HOSTING_BASE_URL).split('?')[0]
-            )
+          ? data.imageUrl.replace(FIREBASE_STORAGE_BASE_URL, HOSTING_BASE_URL)
+                          .split('?')[0]
+                          .replace(/%2F/g, '/')
           : '';
+        // const newImageUrl = data.imageUrl
+        //   ? decodeURIComponent(
+        //       data.imageUrl.replace(FIREBASE_STORAGE_BASE_URL, HOSTING_BASE_URL).split('?')[0]
+        //     )
+        //   : '';
 
         return {
           ...data,
