@@ -5,22 +5,13 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "/contents/**",
-        "storage": {
-          "bucket": "marieke-versleijen.appspot.com",
-          "path": "/contents/**"
-        }
-      }
-    ],
     "headers": [
       {
-        "source": "/contents/**",
+        "source": "**/*.@(js|css|jpg|png|svg|eot|otf|ttf|ttc|woff|woff2|pdf)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=2592000, s-maxage=2592000"
+            "value": "public, max-age=31536000, s-maxage=31536000"
           }
         ]
       }
