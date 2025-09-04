@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "public": ".next",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -13,10 +12,6 @@
           "bucket": "marieke-versleijen.appspot.com",
           "path": "/contents/**"
         }
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
       }
     ],
     "headers": [
