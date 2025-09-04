@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "source": "out",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -15,12 +15,6 @@
             "value": "public, max-age=31536000, s-maxage=31536000"
           }
         ]
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
       }
     ]
   }
