@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, getRedirectResult } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata } from 'firebase/storage';
 import { initializeFirestore, persistentLocalCache, doc, setDoc, collection, getDocs, query, orderBy, updateDoc } from 'firebase/firestore';
 import { getAnalytics, isSupported } from "firebase/analytics";
@@ -16,6 +16,11 @@ const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
+// Throw an error if the environment variables are not set.
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
+  throw new Error('Firebase environment variables are not set. Please check your .env.local file or your deployment environment settings.');
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -28,7 +33,6 @@ if (typeof window !== "undefined") {
     }
   });
 }
-
 
 // Firebase Authentication
 const auth = getAuth(app);
@@ -51,6 +55,7 @@ export {
   analytics,
   signInWithPopup,
   signInWithEmailAndPassword,
+  getRedirectResult,
   storage,
   ref,
   uploadBytes,
