@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, listAll, getDownloadURL, deleteObject, getMetadata, updateMetadata } from 'firebase/storage';
-import { getFirestore, doc, setDoc, collection, getDocs, query, orderBy, updateDoc } from 'firebase/firestore';
+import { initializeFirestore, persistentLocalCache, doc, setDoc, collection, getDocs, query, orderBy, updateDoc } from 'firebase/firestore';
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
@@ -37,8 +37,11 @@ const provider = new GoogleAuthProvider();
 // Firebase Storage
 const storage = getStorage(app);
 
-// Firebase Firestore
-const db = getFirestore(app);
+// Firebase Firestore with offline persistence
+const db = initializeFirestore(app, {
+  localCache: persistentLocalCache(/*{tabManager: 'multi-tab'}*/)
+});
+
 
 // Export necessary Firebase services and utilities
 export {
