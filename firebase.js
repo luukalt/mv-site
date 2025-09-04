@@ -7,13 +7,13 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCjbYAlKbny0xwz-QRGMeoBUsF0ZZfoETo",
-  authDomain: "marieke-versleijen.firebaseapp.com",
-  projectId: "marieke-versleijen",
-  storageBucket: "marieke-versleijen.appspot.com",
-  messagingSenderId: "685554379761",
-  appId: "1:685554379761:web:c35314731ab627947eb250",
-  measurementId: "G-B6FMNC5LCK"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
