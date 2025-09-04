@@ -17,13 +17,8 @@ const ContentPage = () => {
       const items = querySnapshot.docs.map(doc => {
         const data = doc.data();
 
-        // Check if the URLs exist before trying to replace them
-        const newPdfUrl = data.pdfUrl 
-          ? data.pdfUrl.replace(FIREBASE_STORAGE_BASE_URL, HOSTING_BASE_URL).split('?')[0]
-          : '';
-        const newImageUrl = data.imageUrl 
-          ? data.imageUrl.replace(FIREBASE_STORAGE_BASE_URL, HOSTING_BASE_URL).split('?')[0]
-          : '';
+        const newPdfUrl = data.pdfUrl ? HOSTING_BASE_URL + decodeURIComponent(data.pdfUrl.substring(FIREBASE_STORAGE_BASE_URL.length).split('?')[0]) : '';
+        const newImageUrl = data.imageUrl ? HOSTING_BASE_URL + decodeURIComponent(data.imageUrl.substring(FIREBASE_STORAGE_BASE_URL.length).split('?')[0]) : '';
         
         return { 
           ...data, 
