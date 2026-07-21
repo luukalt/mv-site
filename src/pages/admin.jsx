@@ -12,6 +12,8 @@ const AdminPage = () => {
   const [pdfUpload, setPdfUpload] = useState(null);
   const [pngUpload, setPngUpload] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState('leesbevordering');
+  const [uploadType, setUploadType] = useState('pdf'); // 'pdf' of 'url'
+  const [linkUrl, setLinkUrl] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const allowedEmails = ['luukaltenburg@gmail.com', 'mariekeversleijen@outlook.com'];
@@ -76,48 +78,65 @@ const AdminPage = () => {
   };
 
   const uploadFile = async () => {
-    if (!pdfUpload || !pngUpload) return;
-    const pdfName = pdfUpload.name.split('.').slice(0, -1).join('.');
-    const pngName = pngUpload.name.split('.').slice(0, -1).join('.');
-  
-    if (pdfName !== pngName) {
-      alert('The PDF and PNG file names must match.');
+    // De PNG-afbeelding is altijd nodig: die wordt getoond en aangeklikt.
+    if (!pngUpload) {
+      alert('Upload een PNG-afbeelding.');
       return;
     }
-  
+    // De thumbnail moet echt een afbeelding zijn, anders is de <img> "broken".
+    if (!pngUpload.type.startsWith('image/')) {
+      alert('De thumbnail moet een afbeelding zijn (PNG of JPG).');
+      return;
+    }
+    const name = pngUpload.name.split('.').slice(0, -1).join('.');
+
+    // Valideer vooraf, zodat we nooit een verweesde upload in Storage achterlaten.
+    if (uploadType === 'pdf') {
+      if (!pdfUpload) {
+        alert('Upload een PDF.');
+        return;
+      }
+      const pdfName = pdfUpload.name.split('.').slice(0, -1).join('.');
+      if (pdfName !== name) {
+        alert('The PDF and PNG file names must match.');
+        return;
+      }
+    } else if (!linkUrl.trim()) {
+      alert('Voer een URL in.');
+      return;
+    }
+
     try {
-      const pdfRef = ref(storage, `contents/${selectedFolder}/${pdfUpload.name}`);
-      const pngRef = ref(storage, `contents/${selectedFolder}/${pngUpload.name}`);
-      
       const metadata = {
         cacheControl: 'public, max-age=2592000', // Cache for 30 days
       };
-  
-      const [pdfSnapshot, pngSnapshot] = await Promise.all([
-        uploadBytes(pdfRef, pdfUpload, metadata),
-        uploadBytes(pngRef, pngUpload, metadata)
-      ]);
-  
-      // Fetch and log metadata
-      const pdfMetadata = await getMetadata(pdfRef);
-      const pngMetadata = await getMetadata(pngRef);
-      console.log("PDF Cache-Control:", pdfMetadata.cacheControl); // Should output 'public, max-age=2592000'
-      console.log("PNG Cache-Control:", pngMetadata.cacheControl);
-  
-      const [pdfUrl, pngUrl] = await Promise.all([
-        getDownloadURL(pdfRef),
-        getDownloadURL(pngRef)
-      ]);
-  
-      await setDoc(doc(db, "contents", selectedFolder, "files", pdfName), {
-        name: pdfName,
+
+      // Thumbnail (PNG) altijd uploaden naar Storage.
+      const pngRef = ref(storage, `contents/${selectedFolder}/${pngUpload.name}`);
+      await uploadBytes(pngRef, pngUpload, metadata);
+      const pngUrl = await getDownloadURL(pngRef);
+
+      // Het linkdoel is óf een geüploade PDF, óf een externe URL.
+      let pdfUrl;
+      if (uploadType === 'pdf') {
+        const pdfRef = ref(storage, `contents/${selectedFolder}/${pdfUpload.name}`);
+        await uploadBytes(pdfRef, pdfUpload, metadata);
+        pdfUrl = await getDownloadURL(pdfRef);
+      } else {
+        pdfUrl = linkUrl.trim();
+      }
+
+      await setDoc(doc(db, "contents", selectedFolder, "files", name), {
+        name,
         pdfUrl,
         imageUrl: pngUrl,
-        order: files.length
+        order: files.length,
+        type: uploadType,
       });
-  
+
       setPdfUpload(null);
       setPngUpload(null);
+      setLinkUrl('');
       fetchFiles();
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -189,7 +208,7 @@ const AdminPage = () => {
             
           <Button variant="contained" color="error" onClick={handleSignOut} sx={{ mb: 4 }}>Sign Out</Button>
 
-          <Typography variant="body1" sx={{ mb: 1, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>Materiaal toevoegen (PDF en PNG moeten dezelfde naam hebben)</Typography>
+          <Typography variant="body1" sx={{ mb: 1, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>Materiaal toevoegen. De naam komt van de PNG. Bij een PDF moeten PDF en PNG dezelfde naam hebben; bij een URL is dat niet nodig.</Typography>
           <Typography variant="body1" sx={{ mb: 1, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>Kies 'Lesideeen'/'Leesbevordering'/'Boekwijzer'</Typography>
           
             <Select value={selectedFolder} onChange={(e) => setSelectedFolder(e.target.value)} sx={{ mb: 1,  backgroundColor: '#FF914C', color: 'black',}}>
@@ -200,17 +219,32 @@ const AdminPage = () => {
             </Select>
           </Box>
           <Box sx={{ mb: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2, justifyContent: 'center' }}>
-            <Typography variant="body1">Upload PDF</Typography>
-            <Input type="file" onChange={(e) => setPdfUpload(e.target.files[0])} />
+            <Typography variant="body1">Type</Typography>
+            <Select value={uploadType} onChange={(e) => setUploadType(e.target.value)} sx={{ backgroundColor: '#FF914C', color: 'black' }}>
+              <MenuItem value="pdf">PDF uploaden</MenuItem>
+              <MenuItem value="url">URL (link)</MenuItem>
+            </Select>
           </Box>
+
+          {uploadType === 'pdf' ? (
+            <Box sx={{ mb: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2, justifyContent: 'center' }}>
+              <Typography variant="body1">Upload PDF</Typography>
+              <Input type="file" onChange={(e) => setPdfUpload(e.target.files[0])} />
+            </Box>
+          ) : (
+            <Box sx={{ mb: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2, justifyContent: 'center' }}>
+              <Typography variant="body1">URL</Typography>
+              <TextField variant="outlined" placeholder="https://..." value={linkUrl} onChange={(e) => setLinkUrl(e.target.value)} sx={{ width: '100%', maxWidth: '400px' }} />
+            </Box>
+          )}
 
           <Box sx={{ mb: 2, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2, justifyContent: 'center' }}>
             <Typography variant="body1">Upload PNG</Typography>
-            <Input type="file" onChange={(e) => setPngUpload(e.target.files[0])} placeholder="Upload PNG" />
+            <Input type="file" inputProps={{ accept: 'image/*' }} onChange={(e) => setPngUpload(e.target.files[0])} placeholder="Upload PNG" />
           </Box>
 
-          <Box sx={{mb:2, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>  
-            <Button variant="contained" onClick={uploadFile} disabled={!pdfUpload || !pngUpload} sx={{ mt: 2 }}>Upload</Button>
+          <Box sx={{mb:2, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center' }}>
+            <Button variant="contained" onClick={uploadFile} disabled={!pngUpload || (uploadType === 'pdf' ? !pdfUpload : !linkUrl.trim())} sx={{ mt: 2 }}>Upload</Button>
             <Button variant="contained" color="primary" onClick={saveOrder} sx={{ mt: 4 }}>Volgorde Opslaan</Button>
           </Box>
 
