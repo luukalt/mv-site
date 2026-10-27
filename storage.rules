@@ -1,0 +1,25 @@
+rules_version = '2';
+
+// Houd deze lijst gelijk aan allowedEmails in src/pages/admin.jsx.
+function isAdmin() {
+  return request.auth != null
+    && request.auth.token.email in ['luukaltenburg@gmail.com', 'mariekeversleijen@outlook.com'];
+}
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /contents/{folder}/{fileName} {
+      allow read: if true;
+      allow delete: if isAdmin();
+      // Alleen afbeeldingen en PDF's, maximaal 50 MB.
+      allow create, update: if isAdmin()
+        && folder in ['leesbevordering', 'lesideeen', 'boekwijzer']
+        && request.resource.size < 50 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*|application/pdf');
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

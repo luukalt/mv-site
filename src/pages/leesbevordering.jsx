@@ -112,6 +112,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import { db } from '../../firebase';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { safeUrl } from '../utils/safeUrl';
 
 const ContentPage = () => {
   const [contentItems, setContentItems] = useState([]);
@@ -176,9 +177,9 @@ const ContentPage = () => {
                   />
                 )}
                 {/* Use the URLs directly as they come from Firestore */}
-                <a href={item.pdfUrl} target="_blank" rel="noopener noreferrer">
+                <a href={safeUrl(item.pdfUrl)} target="_blank" rel="noopener noreferrer">
                   <img
-                    src={item.imageUrl}
+                    src={safeUrl(item.imageUrl)}
                     alt={item.name}
                     style={{
                       width: '100%',

@@ -5,7 +5,7 @@
 If you discover a security vulnerability in this repository, please follow these steps:
 
 1. Do not open a public issue.
-2. Send an email to `[your email or security contact address]`.
+2. Report it privately via the repository's **Security → Report a vulnerability** tab on GitHub.
 3. Include the details of the vulnerability and any steps to reproduce it.
 
 We take security issues seriously and will respond as quickly as possible to any reports.
