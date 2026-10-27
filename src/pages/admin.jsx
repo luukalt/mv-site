@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { auth, provider, signInWithPopup, getRedirectResult, storage, ref, uploadBytes, deleteObject, getDownloadURL, getMetadata } from '../../firebase';
+import { auth, storage, ref, uploadBytes, deleteObject, getDownloadURL } from '../../firebase';
 import { Button, Container, Typography, Box, Input, Select, MenuItem, TextField } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../../firebase'; // Firestore instance
 import { doc, setDoc, collection, getDocs, updateDoc, query, orderBy, deleteDoc } from 'firebase/firestore';
+import { isSafeUrl, safeUrl } from '../utils/safeUrl';
 
 const AdminPage = () => {
   const [user, setUser] = useState(null);
@@ -16,29 +17,23 @@ const AdminPage = () => {
   const [linkUrl, setLinkUrl] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // Dit bepaalt alleen wat de UI toont. De echte toegangscontrole zit in
+  // firestore.rules en storage.rules; houd die lijst gelijk aan deze.
   const allowedEmails = ['luukaltenburg@gmail.com', 'mariekeversleijen@outlook.com'];
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    } else {
-      const handleRedirectResult = async () => {
-        try {
-          const result = await getRedirectResult(auth);
-          if (result && allowedEmails.includes(result.user.email)) {
-            setUser(result.user);
-            localStorage.setItem('user', JSON.stringify(result.user));
-          } else if (result && !allowedEmails.includes(result.user.email)) {
-            await signOut(auth);
-            alert('Access denied.');
-          }
-        } catch (error) {
-          console.error("Error handling redirect result:", error);
-        }
-      };
-      handleRedirectResult();
-    }
+    // Oude versies bewaarden het hele user-object (incl. tokens) in localStorage.
+    try { localStorage.removeItem('user'); } catch {}
+
+    // Firebase bewaart de sessie zelf; laat de ingelogde gebruiker daaruit komen.
+    return onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser && allowedEmails.includes(currentUser.email)) {
+        setUser(currentUser);
+      } else {
+        if (currentUser) await signOut(auth);
+        setUser(null);
+      }
+    });
   }, []);
 
   const signInWithEmailPassword = async () => {
@@ -46,7 +41,6 @@ const AdminPage = () => {
       const result = await signInWithEmailAndPassword(auth, email, password);
       if (allowedEmails.includes(result.user.email)) {
         setUser(result.user);
-        localStorage.setItem('user', JSON.stringify(result.user));
       } else {
         await signOut(auth);
         alert('Access denied.');
@@ -60,7 +54,6 @@ const AdminPage = () => {
     try {
       await signOut(auth);
       setUser(null);
-      localStorage.removeItem('user');
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -89,6 +82,11 @@ const AdminPage = () => {
       return;
     }
     const name = pngUpload.name.split('.').slice(0, -1).join('.');
+    // De naam wordt gebruikt als pad in Storage en als document-ID in Firestore.
+    if (!name || name.includes('/')) {
+      alert('Ongeldige bestandsnaam.');
+      return;
+    }
 
     // Valideer vooraf, zodat we nooit een verweesde upload in Storage achterlaten.
     if (uploadType === 'pdf') {
@@ -103,6 +101,9 @@ const AdminPage = () => {
       }
     } else if (!linkUrl.trim()) {
       alert('Voer een URL in.');
+      return;
+    } else if (!isSafeUrl(linkUrl.trim())) {
+      alert('De URL moet beginnen met https:// of http://.');
       return;
     }
 
@@ -274,7 +275,7 @@ const AdminPage = () => {
                           boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
                         }}
                       >
-                        <a href={file.url} target="_blank" rel="noopener noreferrer" style={{ flex: 1, textDecoration: 'none', color: 'inherit' }}>
+                        <a href={safeUrl(file.pdfUrl)} target="_blank" rel="noopener noreferrer" style={{ flex: 1, textDecoration: 'none', color: 'inherit' }}>
                           <Typography variant="body1" sx={{ color: 'black' }}>{file.name}</Typography>
                         </a>
                         <Button
